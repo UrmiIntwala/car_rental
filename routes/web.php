@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('startingpoint','StartingPointController');
+
+Route::post('/car/fetch','CarController@fetch')->name('car.fetch');
+
+Route::get('/card',function(){
+    return view('pages.card');
+});

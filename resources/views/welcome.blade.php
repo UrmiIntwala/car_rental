@@ -9,7 +9,7 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="{{asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+        
         
     </head>
     <body>
@@ -32,17 +32,34 @@
                     <ul class="navbar-nav ml-auto">
                             @if (Route::has('login'))
                                 @auth
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                             <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                                    </li> --}}
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            {{ Auth::user()->name }} <span class="caret"></span>
+                                        </a>
+        
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                               onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+        
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </div>
                                     </li>
                                 @else
                                     <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}" style="color:white;">Login</a>
-                                    </li>
+                                    <a class="nav-link" href="{{ route('login') }}" style="color:white;font-size:120%">Login</a>
+                                    </li>&nbsp;&nbsp;&nbsp;
 
                                     @if (Route::has('register'))
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('register') }}" style="color:white;">Register</a>
+                                            <a class="nav-link" href="{{ route('register') }}" style="color:white;font-size:120%">Register</a>
                                         </li>
                                     @endif
                                 @endauth
@@ -64,11 +81,11 @@
                   </select>
             </p>
             <br>
-            <center><a href="cars">
+            <center><a href="startingpoint">
             <button type="button" class="btn btn-block btn-lg" 
                 style="width:50%;margin-top:3%;text-align:left;height:50px;background-color:white;">
                 Start your wonderful journey
-                   <span class="fa fa-chevron-right" aria-hidden="true" style="float:right;padding-top:4px"></span>
+                   <span class="fa fa-chevron-right" aria-hidden="true" style="float:right;padding-top:7px"></span>
                 
             </button></a>
             </center>   
@@ -128,7 +145,126 @@
                     <div class="col-4">
                         <img src="img/Capture3.png" alt="Image">
                     </div>
-                </div>
+            </div>
+        </div><br>
+        <div>
+            <img src="img/rapid.jpg" style="width:100%;height:500px;position:absolute;opacity:0.9" alt="Creta"/>
+            <p style="padding-top:120px;position:relative;color:white;padding-left:400px;font-stretch:expanded;">
+                <b style="font-size:200%;">CAR ON THE GO!</b><br>
+                <span style="font-size:150%">Make a booking,unlock your car,and end 
+                <br>your reservation all from our website.</span>
+            </p>   
+        </div><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="container-fluid" style="text-align: center;color:darkslategray">
+            <h3>HOW LAGOON WORKS</h3>
+            <h6>Drive yourself to an adventure and back in 5 simple steps</h6>
+        </div><br><br>
+        <div class="container-fluid" style="padding-left:100px;">
+            <img src="img/work1.PNG" alt="work-process">
+            <img src="img/work2.PNG" alt="work-process">
+            <img src="img/work3.PNG" alt="work-process">
+            <img src="img/work4.PNG" alt="work-process">
+            <img src="img/work5.PNG" alt="work-process">
         </div>
+        <br><br>
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="first-slide" src="img/collage.jpg" alt="First slide" 
+                    style="filter:blur(8px);height:500px;width:100%">
+                <div class="container">
+                <div class="carousel-caption text-left" 
+                    style="padding-top:5px;;color:black;font-weight:bolder;font-size:150%;">
+                    <p>Appreciate the totally new welcome concept.As an prospective customer , 
+                            I feel this is going to really set an example in car rentals scenery.
+                            Wishing you the very best and come out in flying colors!!
+                    </p>
+                    <p>- Yekula Santosh</p>
+                    
+                </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="second-slide" src="img/collage.jpg" alt="Second slide"
+                style="filter:blur(8px);height:500px;width:100%">
+                <div class="container">
+                <div class="carousel-caption"
+                style="padding-top:5px;;color:black;font-weight:bolder;font-size:150%;">
+                    <p>The experience with lagoon has been excellent.Your process is well 
+                            thought out and service definitely fills a void. Maybe you could 
+                            start a school which teaches "real customer service"!
+                    </p>
+                    <p>- Sunil Rastogi</p>
+                    
+                </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="third-slide" src="img/collage.jpg" alt="Third slide"
+                style="filter:blur(8px);height:500px;width:100%">
+                <div class="container">
+                <div class="carousel-caption text-right"
+                style="padding-top:5px;;color:black;font-weight:bolder;font-size:150%;">
+                    <p>Excellent customer service.Would highly recommend LAGOON to anybody
+                            who is in need of self drive cars.Would be great if they start 
+                            opening more pick up points.
+                    </p>
+                    <p>- Arun M</p>
+                    
+                </div>
+                </div>
+            </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <br>
+        <div class="container-fluid">
+            <img src="img/info.PNG" alt="info">
+        </div>
+
+        <div class="page-footer" style="background-color:#132639;color:white;height:200px;">
+            <div class="container">
+                <div class="row" style="font-size:180%;padding-top:80px;">
+                    <div class="col-2">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-2">
+                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <div style="background-color:#19334d;padding-top:45px;color:white;text-align:center;height:30px">
+                <p style="font-size:125%">© 2018 Copyright:Lagoon.com</p>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     </body>
 </html>

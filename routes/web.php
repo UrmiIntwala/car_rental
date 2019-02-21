@@ -10,23 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/demo','CarController@ToSecondPage');
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/form', function () {
-    return view('pages.testi');
-});
+
 // Route::get('/','MainPageController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Route::resource('dropoff','DropoffTimeController');
+Route::get('/dropoff', ['as' => 'dropoff', 'uses' => 'DropoffTimeController@index']);
+
 Route::resource('startingpoint','StartingPointController');
 
 Route::post('/car/fetch','CarController@fetch')->name('car.fetch');
 
-Route::get('/card','CardController@index');
+Route::get('/card', ['as' => 'card', 'uses' => 'CardController@index']);
+// Route::get('/card','CardController@index');
 
 Route::get('/test','CarController@index');
     

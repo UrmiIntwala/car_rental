@@ -12,6 +12,7 @@ class StartingPointController extends Controller
     }
 
     public function store(Request $request){
+        
         $start_city=$request['city_name'];
         
         return view('pages.pickuptime');

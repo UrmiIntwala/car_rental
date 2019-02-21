@@ -80,14 +80,18 @@
                     <option value="vadodra">Vadodra</option>
                   </select>
             </p>
-            <br>
-            <center><a href="startingpoint">
-            <button type="button" class="btn btn-block btn-lg" 
+            <br><center>
+            <a href="startingpoint">
+                   
+                    
+            <button type="submit" class="btn btn-block btn-lg" 
                 style="width:50%;margin-top:3%;text-align:left;height:50px;background-color:white;">
                 Start your wonderful journey
                    <span class="fa fa-chevron-right" aria-hidden="true" style="float:right;padding-top:7px"></span>
                 
-            </button></a>
+            </button>
+            
+        </a>
             </center>   
             <br>
             <center>

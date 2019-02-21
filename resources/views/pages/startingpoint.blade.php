@@ -24,7 +24,7 @@
         </div><br><br><br><hr><br>
         <div class="container">
             {{-- <form action="{{ route('') }}" method="POST"> --}}
-{!! Form::open(['uri'=>'demo','method'=>'POST','role'=>'form']) !!}
+            {!! Form::open(['uri'=>'demo','method'=>'POST','role'=>'form']) !!}
             @csrf
             <h2>Tell us your Starting Point</h2>
             <br>
@@ -33,11 +33,10 @@
                         {{-- {!! Form::open(['route' => 'test', 'class' => 'd-flex', 'method' => 'post']) !!} --}}
                         <input class="form-control form-control-lg" style="width:100%" type="text"
                         placeholder="Enter City" id="city_name" name="city_name"/>
-                        <div id="cityList"></div>
-                        {{Form::submit('SIGNUP',['class'=>'button btn','style'=>'width: 50%'])}}
-                        {{ csrf_field() }}
+                        <div id="cityList"></div><br>
+                        
                         {{-- <input type="submit" value="submit" class="btn btn-success"> --}}
-                        {!! Form::close() !!}
+                        
                         {{-- <a href="/demo"></button></a> --}}
                         {{--   --}}
                 </div>
@@ -114,9 +113,11 @@
                              placeholder="Tell us your droping point in selected city">
                         </div>
                     </div><br>
-                    
-        </div>
-       
+        </div><br>
+        
+        {{Form::submit('NEXT',['class'=>'button btn btn-success','style'=>'width: 15%;margin-left:80%'])}}
+        {{ csrf_field() }}
+        {!! Form::close() !!}
         <script>
             $(document).ready(function(){
                 $("span").click(function(){

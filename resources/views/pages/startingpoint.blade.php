@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-9">
                     <input class="form-control form-control-lg" style="width:70%" type="text"
-                     placeholder="Tell us your starting point in selected city" id="location_name">
+                     placeholder="Tell us your starting point in selected city" id="location_name" name="location_name">
                      <div id="locationList"></div>
                 </div>
             </div><br>
@@ -59,11 +59,11 @@
             </div>
         </div>
         <br>
-        <div class="container" id="hide" style="display:none;">
+        <div class="container" id="hide">
                 <div class="row">
                         <div class="col-3">
                             <div class="dropdown">
-                                <button onclick="myFunction()" class="dropbtn btn btn-outline-primary">Select City</button>
+                                <button class="dropbtn btn btn-outline-primary">Select City</button>
                                 <div id="myDropdown" class="dropdown-content">
                                     <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
                                     <a href="#">Ahmedabad</a>
@@ -111,7 +111,8 @@
                         </div>
                         <div class="col-9">
                             <input class="form-control form-control-lg" style="width:70%" type="text"
-                             placeholder="Tell us your droping point in selected city">
+                             placeholder="Tell us your droping point in selected city" id="dropcity" name="dropcity">
+                             <div id="dropcityList"></div>
                         </div>
                     </div><br>
         </div><br>
@@ -148,6 +149,7 @@
                     var query=$(this).val();
                     if(query!='')
                     {
+                        
                         var _token=$('input[name="_token"]').val();
                         $.ajax({
                             url:"{{ route('location.fetch') }}",
@@ -156,13 +158,30 @@
                             success:function(data)
                             {
                                 $('#locationList').fadeIn();
-                                $('#locationList').html('hello');
+                                $('#locationList').html(data);
                             }
                         });
                     }
                 });
                 
-                
+                $('#dropcity').keyup(function(){
+                    var query=$(this).val();
+                    if(query!='')
+                    {
+                        //$('#dropcityList').html('hey');
+                        var _token=$('input[name="_token"]').val();
+                        $.ajax({
+                            url:"{{ route('car.fetch') }}",
+                            method:"post",
+                            data:{query:query,_token:_token},
+                            success:function(data)
+                            {
+                                $('#dropcityList').fadeIn();
+                                $('#dropcityList').html(data);
+                            }
+                        });
+                    }
+                }); 
             });
             // $(document).ready(function(){
             //     $('a').click(function(){

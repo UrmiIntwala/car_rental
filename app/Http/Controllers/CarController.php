@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\City;
-use App\Loaction;
+use App\Location;
 class CarController extends Controller
 {
     /**
@@ -31,15 +31,16 @@ class CarController extends Controller
         if($request->get('query')){
              $query=$request->get('query');
              //$data=DB::table('App\City')->where('city_name','LIKE','%{$query}%')->get();
-          // $data=App/City::where('city_name','like','surat')->get();
+        //   $data=App/City::where('city_name','like','surat')->get();
           $data=City::where('city_name','like','%'.$query.'%')->get();
+        //   $data=Location::all();
             $output='<ul class="dropdown-menu" style="display:block; position:relative">';
-            
+            //$output .= '<li><a href="#">hey hey</a></li>';
             foreach($data as $row)
             {
                  $output .= '<li><a href="#">'.$row->city_name.'</a></li>';
                 // $output .= '<li>'.$row->city_name.'</li>';
-               //  $output .= '<li><a href="#">surat</a></li>';
+                //$output .= '<li><a href="#">surat</a></li>';
             }
             $output.='</ul>';
             echo $output;
@@ -53,9 +54,9 @@ class CarController extends Controller
             $query=$request->get('query');
             //$data=DB::table('App\City')->where('city_name','LIKE','%{$query}%')->get();
          // $data=App/City::where('city_name','like','surat')->get();
-         $data=Location::where('location_name','like','%'.$query.'%')->get();
+       $data=Location::where('location_name','like','%'.$query.'%')->get();
            $output='<ul class="dropdown-menu" style="display:block; position:relative">';
-           
+        //    $data=Location::all();
            foreach($data as $row)
            {
                 $output .= '<li><a href="#">'.$row->location_name.'</a></li>';

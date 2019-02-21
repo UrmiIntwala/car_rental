@@ -13,8 +13,18 @@ class StartingPointController extends Controller
 
     public function ToSecondPage(Request $request){
         
-        $start_city=$request['city_name'];
-        
+        //$start_city=$request['city_name'];
+        // session(['start_city' => $request['city_name']]);
+
+        //return session('start_city');
+
+        if($request['city_name']!=null && $request['location_name']!=null && $request['dropcity']!=null)
+        {
+            session(['start_city' => $request['city_name']]);
+            session(['location' => $request['location_name']]);
+            session(['drop_city' => $request['dropcity']]);
+        }
+       // return $request->session()->all();
         return view('pages.pickuptime');
     }
 

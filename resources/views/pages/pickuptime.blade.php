@@ -58,11 +58,11 @@
           </div> --}}
           <br>
             <span style="font-weight:bold">Select date</span>&nbsp;&nbsp;&nbsp;
-          <input type="date" id="myDate">
+          <input type="date" id="myDate" name="myDate">
           <br><br>
           <span style="font-weight:bold">At what time do you need the car</span>&nbsp;&nbsp;&nbsp;
-          Hours:<input type="number" id="hours" min="1" max="12">&nbsp;&nbsp;&nbsp;
-          Minutes:<input type="number" id="hours" min="00" max="55" step="5">&nbsp;&nbsp;&nbsp; 
+          Hours:<input type="number" id="hours" min="1" max="12" name="hours">&nbsp;&nbsp;&nbsp;
+          Minutes:<input type="number" id="minute" min="00" max="55" step="5" name="minute">&nbsp;&nbsp;&nbsp; 
           <br><br>
           <input type="submit" class="btn btn-success btn-lg">
         </div>

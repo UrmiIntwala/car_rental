@@ -35,7 +35,7 @@ Route::post('/third','StartingPointController@ToThirdPage');
 
 Route::post('/car/fetch','CarController@fetch')->name('car.fetch');
 
-Route::post('/location/fetch','CarController@location_fetch')->name('location.fetch');
+Route::post('/car/location_fetch','CarController@location_fetch')->name('location.fetch');
 
 Route::get('/card', ['as' => 'card', 'uses' => 'CardController@index']);
 Route::get('/tocard','StartingPointController@ToCard');

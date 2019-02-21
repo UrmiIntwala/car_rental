@@ -23,16 +23,31 @@ class StartingPointController extends Controller
             session(['start_city' => $request['city_name']]);
             session(['location' => $request['location_name']]);
             session(['drop_city' => $request['dropcity']]);
+            return view('pages.pickuptime');
+        }
+        else
+         {
+            return view('pages.startingpoint');
         }
        // return $request->session()->all();
-        return view('pages.pickuptime');
+        
     }
 
     public function ToThirdPage(Request $request)
     {
-        $start_city=$request['car_name'];
-        return view('pages.dropofftime');
+        //$start_city=$request['car_name'];
+        //return view('pages.dropofftime');
         //return $start_city;
+        if($request['mydate']!=null && $request['hour']!=null && $request['minute']!=null)
+        {
+            session(['mydate' => $request['mydate']]);
+            session(['hour' => $request['hour']]);
+            session(['minute' => $request['minute']]);
+            return view('pages.dropofftime');
+        }
+        else {
+            return view('pages.pickuptime');
+        }
     }
 
     public function ToCard(Request $request)

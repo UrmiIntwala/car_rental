@@ -18,11 +18,14 @@ class StartingPointController extends Controller
 
         //return session('start_city');
 
-        if($request['city_name']!=null && $request['location_name']!=null && $request['dropcity']!=null)
+        if($request['city_name']!=null && $request['location_name']!=null)
         {
             session(['start_city' => $request['city_name']]);
             session(['location' => $request['location_name']]);
+            if($request['dropcity']!=null){
             session(['drop_city' => $request['dropcity']]);
+            }
+            session(['drop_city'=>null]);
             return view('pages.pickuptime');
         }
         else

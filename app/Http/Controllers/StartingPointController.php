@@ -11,16 +11,23 @@ class StartingPointController extends Controller
         return view('pages.startingpoint');
     }
 
-    public function store(Request $request){
+    public function ToSecondPage(Request $request){
         
         $start_city=$request['city_name'];
         
         return view('pages.pickuptime');
     }
 
-    public function ToSecondPage(Request $request)
+    public function ToThirdPage(Request $request)
     {
-        //$start_city=$request['car_name'];
-       // return $start_city;
+        $start_city=$request['car_name'];
+        return view('pages.dropofftime');
+        //return $start_city;
     }
+
+    public function ToCard(Request $request)
+    {
+        
+    }
+    
 }

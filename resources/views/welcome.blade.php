@@ -81,17 +81,17 @@
                   </select>
             </p>
             <br><center>
-            <a href="startingpoint">
+            <!-- <a href="startingpoint"> -->
                    
-                    
+           <form action="spoint" method="GET">         
             <button type="submit" class="btn btn-block btn-lg" 
                 style="width:50%;margin-top:3%;text-align:left;height:50px;background-color:white;">
                 Start your wonderful journey
                    <span class="fa fa-chevron-right" aria-hidden="true" style="float:right;padding-top:7px"></span>
                 
             </button>
-            
-        </a>
+            </form>
+        <!-- </a> -->
             </center>   
             <br>
             <center>

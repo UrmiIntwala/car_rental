@@ -33,7 +33,8 @@
         </div><br><br><br><hr>
         {{-- {{  Form::open(array('uri'=>'dropoff', 'method' => 'post')) }} --}}
         {{-- <form action="dropofftime" method="POST"> --}}
-        <form action="{{ route('card') }}">
+        <!-- <form action="{{ route('card') }}"> -->
+        <form action="card" method="get">
         <div class="container" >
           <h1>Till when do you need the car?</h1><br>
 
@@ -66,8 +67,8 @@
             <br><br>
             <input type="submit" class="btn btn-success btn-lg">
         </div>
-        {{  Form::close()  }}  
-        {{-- </form> --}}
+        <!-- {{  Form::close()  }}   -->
+        </form>
         
         {{-- To get the value of date
           <button onclick="myFunction()">You selected</button>

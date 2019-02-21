@@ -23,8 +23,8 @@
             </ul>
         </div><br><br><br><hr><br>
         <div class="container">
-            {{-- <form action="{{ route('') }}" method="POST"> --}}
-            {!! Form::open(['uri'=>'demo','method'=>'POST','role'=>'form']) !!}
+            <form action="second" method="POST">
+            <!-- {!! Form::open(['uri'=>'demo','method'=>'POST','role'=>'form']) !!} -->
             @csrf
             <h2>Tell us your Starting Point</h2>
             <br>
@@ -42,7 +42,8 @@
                 </div>
                 <div class="col-9">
                     <input class="form-control form-control-lg" style="width:70%" type="text"
-                     placeholder="Tell us your starting point in selected city">
+                     placeholder="Tell us your starting point in selected city" id="location_name">
+                     <div id="locationList"></div>
                 </div>
             </div><br>
             <div class="row">
@@ -117,7 +118,8 @@
         
         {{Form::submit('NEXT',['class'=>'button btn btn-success','style'=>'width: 15%;margin-left:80%'])}}
         {{ csrf_field() }}
-        {!! Form::close() !!}
+        <!-- {!! Form::close() !!} -->
+        </form>
         <script>
             $(document).ready(function(){
                 $("span").click(function(){
@@ -137,6 +139,24 @@
                             {
                                 $('#cityList').fadeIn();
                                 $('#cityList').html(data);
+                            }
+                        });
+                    }
+                });
+
+                $('#location_name').keyup(function(){
+                    var query=$(this).val();
+                    if(query!='')
+                    {
+                        var _token=$('input[name="_token"]').val();
+                        $.ajax({
+                            url:"{{ route('location.fetch') }}",
+                            method:"post",
+                            data:{query:query,_token:_token},
+                            success:function(data)
+                            {
+                                $('#locationList').fadeIn();
+                                $('#locationList').html('hello');
                             }
                         });
                     }

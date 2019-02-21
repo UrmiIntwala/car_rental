@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\City;
+use App\Loaction;
 class CarController extends Controller
 {
     /**
@@ -46,11 +47,32 @@ class CarController extends Controller
         }
     }
 
-    public function ToSecondPage(Request $request)
+    public function location_fetch(Request $request)
+    {
+        if($request->get('query')){
+            $query=$request->get('query');
+            //$data=DB::table('App\City')->where('city_name','LIKE','%{$query}%')->get();
+         // $data=App/City::where('city_name','like','surat')->get();
+         $data=Location::where('location_name','like','%'.$query.'%')->get();
+           $output='<ul class="dropdown-menu" style="display:block; position:relative">';
+           
+           foreach($data as $row)
+           {
+                $output .= '<li><a href="#">'.$row->location_name.'</a></li>';
+               // $output .= '<li>'.$row->city_name.'</li>';
+              //  $output .= '<li><a href="#">surat</a></li>';
+           }
+           $output.='</ul>';
+           echo $output;
+          //return $output;
+       }
+    }
+
+    /*public function ToSecondPage(Request $request)
     {
         $start_city=$request['car_name'];
         return $start_city;
-    }
+    }*/
 
     /**
      * Show the form for creating a new resource.

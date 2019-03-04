@@ -41,8 +41,9 @@ Route::get('/card', ['as' => 'card', 'uses' => 'CardController@ShowCard']);
 Route::get('/tocard','StartingPointController@ToCard');
 
 //Route::get('/test','CarController@index');
-    
-
+Route::get('/addcar', function () {
+    return view('pages.addcar');
+});
 
 // Route::get('/card',function(){
 //     return view('pages.card');

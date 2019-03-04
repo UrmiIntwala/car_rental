@@ -18,6 +18,8 @@ Route::get('/', function () {
 // Route::get('/','MainPageController@index');
 Auth::routes();
 
+Route::get('/send','CarController@send');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Route::resource('dropoff','DropoffTimeController');
@@ -31,7 +33,15 @@ Route::post('/second','StartingPointController@ToSecondPage');
 
 Route::post('/third','StartingPointController@ToThirdPage');
 
-// Route::get('/mycard','CardController@index');
+Route::get('/test',function(){
+    // return view('pages.startingpoint');
+    if (Gate::allows('admin-only', Auth::user())) {
+        return view('pages.startingpoint');
+    }
+    else {
+        return 'not authorized';
+    }
+});
 
 Route::post('/car/fetch','CarController@fetch')->name('car.fetch');
 
@@ -41,9 +51,16 @@ Route::get('/card', ['as' => 'card', 'uses' => 'CardController@ShowCard']);
 Route::get('/tocard','StartingPointController@ToCard');
 
 //Route::get('/test','CarController@index');
-    
+ 
+Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/github/facebook', 'Auth\LoginController@handleProviderCallback');
 
 
+Route::get('/book','CardController@bookcar');
+Route::post('/paytm-callback', 'CardController@paytmCallback');
 // Route::get('/card',function(){
 //     return view('pages.card');
 // });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

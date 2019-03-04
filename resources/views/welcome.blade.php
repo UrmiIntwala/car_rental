@@ -35,6 +35,31 @@
                                     {{-- <li class="nav-item">
                                             <a class="nav-link" href="{{ url('/home') }}">Home</a>
                                     </li> --}}
+                                    {{-- @if(Auth::user()->role_id==1) --}}
+                                    @can('admin-only',Auth::user())
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <i class="fa fa-briefcase">Admin</i> <span class="caret"></span>
+                                        </a>
+        
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="{{ url('test') }}">                                              >
+                                                Add car                           
+                                            </a>
+                                            <a class="dropdown-item" href="{{ url('test') }}">                                              >
+                                                Add Mediators
+                                                </a>
+                                            <a class="dropdown-item" href="{{ url('test') }}">                                              >
+                                                Add city                            
+                                            </a>
+                                        </div>
+                                    </li> 
+                                    @endcan
+                                    
+                                    {{-- @endif --}}
+                                    {{-- <a class="dropdown-item" href="url('/admin')"> --}}
+                                                
+                                            </a>
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }} <span class="caret"></span>

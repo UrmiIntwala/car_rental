@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\City;
 use App\Location;
+use Mail;
+use App\Mail\sendMail;
 class CarController extends Controller
 {
     /**
@@ -139,5 +141,14 @@ class CarController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function send()
+    {
+        // Mail::send(['text'=>'mail'],['name','jaimit'],function($message){
+        //     $message->to('intwalaurmi@gmail.com','To Urmi')->subject('Warning');
+        //     $message->from('jaimitgandhi9@gmail.com','Jaimit');
+        // });
+        Mail::send(new sendMail());
     }
 }

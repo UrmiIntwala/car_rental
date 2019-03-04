@@ -34,8 +34,16 @@
         {{-- {{  Form::open(array('uri'=>'dropoff', 'method' => 'post')) }} --}}
         {{-- <form action="dropofftime" method="POST"> --}}
         <!-- <form action="{{ route('card') }}"> -->
+          
         <form action="card" method="get">
         <div class="container" >
+            <div style="color:red;">
+                @if(!empty($error))
+                  {{$error}}
+                  @else
+                  {{-- {{$error}} --}}
+                @endif
+              </div>
           <h1>Till when do you need the car?</h1><br>
 
           {{-- <div class="input-group" style="width:30%">
@@ -61,7 +69,7 @@
             <span style="font-weight:bold">Select date</span>&nbsp;&nbsp;&nbsp;
             <input type="date" id="mydropdate" name="mydropdate">
             <br><br>
-            <span style="font-weight:bold">At what time do you need the car</span>&nbsp;&nbsp;&nbsp;
+            <span style="font-weight:bold">At what time you will drop the car</span>&nbsp;&nbsp;&nbsp;
             Hours:<input type="number" id="hour" min="1" max="12" name="drophour">&nbsp;&nbsp;&nbsp;
             Minutes:<input type="number" id="minute" min="00" max="55" step="5" name="dropminute">&nbsp;&nbsp;&nbsp; 
             <br><br>

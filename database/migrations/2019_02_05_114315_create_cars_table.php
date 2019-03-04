@@ -21,6 +21,14 @@ class CreateCarsTable extends Migration
             $table->integer('price');
             $table->integer('km_price');
             $table->string('path');
+            $table->string('number');
+            $table->string('city');
+            $table->integer('in_time_hour')->nullable();
+            $table->integer('in_time_minute')->nullable();
+            $table->integer('out_time_hour')->nullable();
+            $table->integer('out_time_minute')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('drop_date')->nullable();
             $table->timestamps();
         });
     }

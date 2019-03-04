@@ -36,6 +36,7 @@
 <div class="container">
         @if(count($car)>0)
         @foreach($car as $cars)
+        <form action="book" method="GET">
         <div class="row">
                 <div class="col-3">
                 <img src={{$cars->path}} alt='img'>
@@ -43,7 +44,11 @@
        
             <div class="col-6">
             <h3>{{$cars->car_name}}</h3><br>
-            
+            <input type="text" name="car_name" id="car_name" value={{$cars->car_name}} style="display:none;">
+            <input type="text" name="seat" id="seat" value={{$cars->seat}} style="display:none;">
+            <input type="text" name="bag" id="bag" value={{$cars->bags}} style="display:none;">
+            <input type="text" name="price" id="price" value={{$cars->price}} style="display:none;">
+            <input type="text" name="km_price" id="km_price" value={{$cars->km_price}} style="display:none;">
                 <div style="margin-top:0;">
                     <span class="fa fa-car text-muted" aria-hidden="true"></span>
                     <span style="font-size:70%;font-weight:700" class="text-muted">{{$cars->seat}} Seater</span>|
@@ -58,7 +63,7 @@
             <span style="color:green;font-size:120%;">{{$cars->price}}</span>
                     <br>
             <span class="text-muted" style="font-size:70%;"> Rs{{$cars->km_price}}/km </span><br><br>
-                    <button type="button" class="btn btn-success">Book Now</button>
+                    <button type="submit" class="btn btn-success">Book Now</button>
             </div>  
         </div>
         <div class="row" style="align:center;">  
@@ -67,7 +72,10 @@
         <div class="row" id="panel" style="display:none;">
             hello
         </div>
+    </form>
         @endforeach
+        <br>
+        {{-- {{ $car->links() }}</div> --}}
     @else
         <p>No cars</p>
     @endif

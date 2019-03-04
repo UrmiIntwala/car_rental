@@ -10,7 +10,7 @@ class StartingPointController extends Controller
     {
         return view('pages.startingpoint');
     }
-
+    
     public function ToSecondPage(Request $request){
         
         //$start_city=$request['city_name'];

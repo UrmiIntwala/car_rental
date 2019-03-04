@@ -9,7 +9,7 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="{{asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-        
+        <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
         
     </head>
     <body>

@@ -51,16 +51,25 @@ Route::get('/card', ['as' => 'card', 'uses' => 'CardController@ShowCard']);
 Route::get('/tocard','StartingPointController@ToCard');
 
 //Route::get('/test','CarController@index');
-<<<<<<< HEAD
  
 Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/github/facebook', 'Auth\LoginController@handleProviderCallback');
 
-=======
 Route::get('/addcar', function () {
     return view('pages.addcar');
 });
->>>>>>> 43e7866673b8eba65a052d4a1f837ea94c3e18ac
+
+Route::get('/addcity', function () {
+    return view('pages.addcity');
+});
+
+Route::get('/addinnercity', function () {
+    return view('pages.addinnercity');
+});
+
+Route::get('/bookdetails', function () {
+    return view('pages.bookdetails');
+});
 
 Route::get('/book','CardController@bookcar');
 Route::post('/paytm-callback', 'CardController@paytmCallback');

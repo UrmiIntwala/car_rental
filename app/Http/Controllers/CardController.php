@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // use App\Http\Controllers\Auth;
+//use App\Http\Controllers\DateTime;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use App\Car;
 use App\Order;
@@ -38,7 +40,7 @@ class CardController extends Controller
 
     public function ShowCard(Request $request)
     {
-        $car = Car::all();
+        //$car = Car::all();
         if(($request['mydropdate']!=null && $request['drophour']!=null && $request['dropminute']!=null))
         {
             $format = "d_m_y";
@@ -56,7 +58,33 @@ class CardController extends Controller
             session(['dropminute' => $request['dropminute']]);
             //  $car = Car::where('city',session('start_city'))->paginate(1);
             // $car=Car::paginate(1);
-             return view('pages.card')->with('car', $car);
+            // $car=Car::where('city',session('start_city'));
+            // $car=Car::where([['city',session('start_city')],
+            //                 ['drop_date','<',$request['mydropdate']],
+            //                 ])->get();
+            $query=Car::all();
+         
+            $dayAfter = (new DateTime(session('mydate')))->format('Y-m-d');
+             //return $dayAfter; 
+            $car=Car::where('city',session('start_city'))->where(function($query)
+                                                {    $query->whereDate('drop_date','<=',session('mydate'))
+                                                    ->orWhere('drop_date',NULL);       
+                                                    }   )
+                                                    ->where(function($query){
+                                                        $query->where('out_time_hour','<',session('start_hour'))
+                                                        ->orWhere('out_time_hour',NULL);
+                                                    })->where('booked','<>',1)
+                                                    ->get();
+
+            //   return $car; 
+            // $car=Car::where('city',session('start_city'))->where(function($query)
+            //                                    {    $query->where('drop_date','<',session('mydate'))
+            //                                          ->orWhere('drop_date',NULL);       
+            //                                          }   )
+            //                                          ->get();
+                    //return $car;
+            
+            return view('pages.card')->with('car', $car);
         }
         else {
             return view('pages.dropofftime');
@@ -80,8 +108,14 @@ class CardController extends Controller
             $order = new Order();
             $order->order_id = $order_id;
             $order->status = 'pending';
-            // $order->price = ( $request->price ) ? $request->price : '';
-            $order->price=9000;
+            // $order->price = ( $request->price ) ? $request->price : ''; 
+            $datetime1 = strtotime(session('mydropdate'));
+            $datetime2 = strtotime(session('mydate'));
+            $secs = $datetime1 - $datetime2;// == return sec in difference
+            $days = $secs / 86400;
+            //return $days;
+            $order->price=$days*$request['price'];
+           // return $order->price;
             $order->transaction_id = '';
             $order->save();
             //return 'hello';

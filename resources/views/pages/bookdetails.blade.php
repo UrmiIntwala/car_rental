@@ -62,7 +62,7 @@ body, html {
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <h1 style="text-align:center;">BOOKING DETAILS</h1><br><br>
-                <form method="POST" action="">
+                <form method="POST" action="book">
                 @csrf
                 <div class="row">
                     <div class="col-6">

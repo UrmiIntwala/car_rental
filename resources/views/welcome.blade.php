@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="{{asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-        
-    </head>
+    
+        </head>
     <body>
         <nav class="navbar navbar-expand-md" style="background-color:#132639;">
             <div class="container">
@@ -60,8 +60,8 @@
                                     {{-- <a class="dropdown-item" href="url('/admin')"> --}}
                                                 
                                             </a>
-                                    <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <li class="nav-item dropdown" >
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle hover" style="color:white;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             {{ Auth::user()->name }} <span class="caret"></span>
                                         </a>
         
@@ -96,7 +96,7 @@
             
         <div class="bg" style="background-image:url(img/car.jpg);height:100%;">
             <p style="text-align:center;color:white;font-size:300%;font-weight:600;padding-top:10%;">DRIVE IN THE CITY AND OUTSTATION<p>
-            <p style="text-align:center;color:white;font-size:150%;font-weight:500">
+            {{-- <p style="text-align:center;color:white;font-size:150%;font-weight:500">
                 Self Drive Car Rental in <select style="color:black" name="city">
                     <option value="surat">Surat</option>
                     <option value="ahmedabad">Ahmedabad</option>
@@ -104,7 +104,7 @@
                     <option value="pune">Pune</option>
                     <option value="vadodra">Vadodra</option>
                   </select>
-            </p>
+            </p> --}}
             <br><center>
             <!-- <a href="startingpoint"> -->
                    

@@ -44,8 +44,8 @@ class StartingPointController extends Controller
         if($request['mydate']!=null && $request['hour']!=null && $request['minute']!=null)
         {
             session(['mydate' => $request['mydate']]);
-            session(['hour' => $request['hour']]);
-            session(['minute' => $request['minute']]);
+            session(['start_hour' => $request['hour']]);
+            session(['start_minute' => $request['minute']]);
             return view('pages.dropofftime');
         }
         else {

@@ -36,7 +36,7 @@
 <div class="container">
         @if(count($car)>0)
         @foreach($car as $cars)
-        <form action="book" method="GET">
+        <form action="bookdetails" method="GET">
         <div class="row">
                 <div class="col-3">
                 <img src={{$cars->path}} alt='img'>
@@ -55,7 +55,8 @@
                     <span class="fa fa-suitcase text-muted" aria-hidden="true"></span>
                     <span style="font-size:70%;font-weight:700" class="text-muted">{{$cars->bags}} Bags</span>|
                     <span class="fa fa-user text-muted" aria-hidden="true"></span>
-                    <span style="font-size:70%;font-weight:700" class="text-muted">Age Limit:18+</span>
+                    <span style="font-size:70%;font-weight:700" class="text-muted">Age Limit:18+</span>|
+                <span style="font-size:70%;font-weight:700" class="text-muted">Plate No{{$cars->plate_no}}</span>
                 </div>
             </div>
             <div class="col-3" style="text-align:right;">

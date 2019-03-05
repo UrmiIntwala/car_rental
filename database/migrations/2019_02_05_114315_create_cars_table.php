@@ -23,6 +23,8 @@ class CreateCarsTable extends Migration
             $table->string('path');
             $table->string('number');
             $table->string('city');
+            $table->string('plate_no');
+            $table->integer('booked')->default(0);
             $table->integer('in_time_hour')->nullable();
             $table->integer('in_time_minute')->nullable();
             $table->integer('out_time_hour')->nullable();

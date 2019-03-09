@@ -40,9 +40,15 @@ return [
         ],
     ],
 
+    // 'facebook' => [
+    //     'client_id' => env('897494670425664'),
+    //     'client_secret' => env('66eb946181ef2493a9d495b36107a392'),
+    //     'redirect' => 'http://localhost:8000/auth/facebook/callback',
+    // ],
+
     'facebook' => [
-        'client_id' => env('897494670425664'),
-        'client_secret' => env('66eb946181ef2493a9d495b36107a392'),
-        'redirect' => 'http://localhost:8000/auth/facebook/callback',
+        'client_id' => env('809477792750421'),
+        'client_secret' => env('4f9b4f60d460d1abc7c7b7154f0b11a0'),
+        'redirect' => 'http://localhost:8000/login/facebook/callback',
     ],
 ];

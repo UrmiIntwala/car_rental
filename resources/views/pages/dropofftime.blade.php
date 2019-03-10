@@ -70,7 +70,7 @@
             <input type="date" id="mydropdate" name="mydropdate">
             <br><br>
             <span style="font-weight:bold">At what time you will drop the car</span>&nbsp;&nbsp;&nbsp;
-            Hours:<input type="number" id="hour" min="1" max="12" name="drophour">&nbsp;&nbsp;&nbsp;
+            Hours:<input type="number" id="hour" min="1" max="24" name="drophour">&nbsp;&nbsp;&nbsp;
             Minutes:<input type="number" id="minute" min="00" max="55" step="5" name="dropminute">&nbsp;&nbsp;&nbsp; 
             <br><br>
             <input type="submit" class="btn btn-success btn-lg">

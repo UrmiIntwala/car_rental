@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 // use App\Http\Controllers\Auth;
+//use App\Http\Controllers\DateTime;
+use App\Customer;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use App\Car;
 use App\Order;
+use Mail;
+use App\Mail\sendMail;
 class CardController extends Controller
 {
     function index()
@@ -38,7 +43,7 @@ class CardController extends Controller
 
     public function ShowCard(Request $request)
     {
-        $car = Car::all();
+        //$car = Car::all();
         if(($request['mydropdate']!=null && $request['drophour']!=null && $request['dropminute']!=null))
         {
             $format = "d_m_y";
@@ -56,7 +61,33 @@ class CardController extends Controller
             session(['dropminute' => $request['dropminute']]);
             //  $car = Car::where('city',session('start_city'))->paginate(1);
             // $car=Car::paginate(1);
-             return view('pages.card')->with('car', $car);
+            // $car=Car::where('city',session('start_city'));
+            // $car=Car::where([['city',session('start_city')],
+            //                 ['drop_date','<',$request['mydropdate']],
+            //                 ])->get();
+            $query=Car::all();
+         
+            $dayAfter = (new DateTime(session('mydate')))->format('Y-m-d');
+             //return $dayAfter; 
+            $car=Car::where('city',session('start_city'))->where(function($query)
+                                                {    $query->whereDate('drop_date','<=',session('mydate'))
+                                                    ->orWhere('drop_date',NULL);       
+                                                    }   )
+                                                    ->where(function($query){
+                                                        $query->where('out_time_hour','<',session('start_hour'))
+                                                        ->orWhere('out_time_hour',NULL);
+                                                    })->where('booked','<>',1)
+                                                    ->get();
+
+            //   return $car; 
+            // $car=Car::where('city',session('start_city'))->where(function($query)
+            //                                    {    $query->where('drop_date','<',session('mydate'))
+            //                                          ->orWhere('drop_date',NULL);       
+            //                                          }   )
+            //                                          ->get();
+                    //return $car;
+            
+            return view('pages.card')->with('car', $car);
         }
         else {
             return view('pages.dropofftime');
@@ -64,8 +95,9 @@ class CardController extends Controller
         
     }
 
-    public function bookcar(Request $request)
+    public function booking_details(Request $request)
     {
+        return 'hello';
         // $car_name=$request['car_name'];
        session(['car_name'=>$request['car_name']]); 
         session(['seat'=>$request['seat']]);
@@ -73,6 +105,51 @@ class CardController extends Controller
         session(['price'=>$request['price']]);
         session(['km_price'=>$request['km_price']]);
         
+       
+        return view('pages.bookdetails');
+
+        // if (Auth::user()) {   // Check is user logged in
+        //     $example= "example";
+        //    // return $request;
+        //     $order_id = uniqid();
+        //     $order = new Order();
+        //     $order->order_id = $order_id;
+        //     $order->status = 'pending';
+        //     // $order->price = ( $request->price ) ? $request->price : ''; 
+        //     $datetime1 = strtotime(session('mydropdate'));
+        //     $datetime2 = strtotime(session('mydate'));
+        //     $secs = $datetime1 - $datetime2;// == return sec in difference
+        //     $days = $secs / 86400;
+        //     //return $days;
+        //     $order->price=$days*$request['price'];
+        //    // return $order->price;
+        //     $order->transaction_id = '';
+        //     $order->save();
+        //     //return 'hello';
+        //     $data_for_request = $this->handlePaytmRequest( $order_id, $order->price );
+        //     $paytm_txn_url = 'https://securegw-stage.paytm.in/theia/processTransaction';
+        //     $paramList = $data_for_request['paramList'];
+        //     $checkSum = $data_for_request['checkSum'];
+        //     return view( 'paytm-merchant-form', compact( 'paytm_txn_url', 'paramList', 'checkSum' ) );
+           // return view('pages.payment');
+
+        // } else {
+        //     return view('auth.login');
+        // }
+    
+       return $car_name;
+    }
+
+    public function doPayment(Request $request)
+    {
+         
+        session(['fullname'=>$request['fullname']]);
+        session(['license_no'=>$request['license_no']]);
+        session(['mobile'=>$request['mobile']]);
+        session(['email'=>$request['email']]);
+        session(['aadhar'=>$request['aadhar']]);
+        session(['user_address'=>$request['user_address']]);
+
         if (Auth::user()) {   // Check is user logged in
             $example= "example";
            // return $request;
@@ -80,8 +157,15 @@ class CardController extends Controller
             $order = new Order();
             $order->order_id = $order_id;
             $order->status = 'pending';
-            // $order->price = ( $request->price ) ? $request->price : '';
-            $order->price=9000;
+            // $order->price = ( $request->price ) ? $request->price : ''; 
+            $datetime1 = strtotime(session('mydropdate'));
+            $datetime2 = strtotime(session('mydate'));
+            $secs = $datetime1 - $datetime2;// == return sec in difference
+            $days = $secs / 86400;
+            //return $days;
+            // $order->price=$days*session('price');
+           $order->price=100;
+            // return $order->price;
             $order->transaction_id = '';
             $order->save();
             //return 'hello';
@@ -90,13 +174,7 @@ class CardController extends Controller
             $paramList = $data_for_request['paramList'];
             $checkSum = $data_for_request['checkSum'];
             return view( 'paytm-merchant-form', compact( 'paytm_txn_url', 'paramList', 'checkSum' ) );
-           // return view('pages.payment');
-
-        } else {
-            return view('auth.login');
         }
-    
-       return $car_name;
     }
 
     public function handlePaytmRequest( $order_id, $amount ) {
@@ -377,7 +455,18 @@ class CardController extends Controller
 			$order = Order::where( 'order_id', $order_id )->first();
 			$order->status = 'complete';
 			$order->transaction_id = $transaction_id;
-			$order->save();
+            $order->save();
+            $customer=new Customer();
+            $customer->name=session('fullname');
+            $customer->license_no=session('license_no');
+            $customer->mobile=session('mobile');
+            $customer->email=session('email');
+            $customer->aadhar=session('aadhar');
+
+            // return session('user_address');
+            $customer->user_address=session('user_address');
+            $customer->save();
+            Mail::send(new sendMail());
 			return view( 'order-complete', compact( 'order', 'status' ) );
 		} else if( 'TXN_FAILURE' === $request['STATUS'] ){
 			return view( 'payment-failed' );

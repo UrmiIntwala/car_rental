@@ -59,11 +59,49 @@ Route::get('/tocard','StartingPointController@ToCard');
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
 Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('/addcar', function () {
-    return view('pages.addcar');
+Route::get('/addcar', function(){
+    // return view('pages.startingpoint');
+    if (Gate::allows('admin-only', Auth::user())) {
+        return view('pages.addcar');
+    }
+    else {
+        return 'not authorized';
+    }
 });
 
-Route::get('/book','CardController@bookcar');
+Route::get('/addcity',function(){
+    // return view('pages.startingpoint');
+    if (Gate::allows('admin-only', Auth::user())) {
+        return view('pages.addcity');
+    }
+    else {
+        return 'not authorized';
+    }
+});
+
+Route::get('/addinnercity', function(){
+    // return view('pages.startingpoint');
+    if (Gate::allows('admin-only', Auth::user())) {
+        return view('pages.addinnercity');
+    }
+    else {
+        return 'not authorized';
+    }
+});
+Route::post('/city', 'CarController@addcity');
+Route::post('/car', 'CarController@addcar');
+
+Route::get('/bookdetails', function () {
+    return view('pages.bookdetails');
+});
+
+Route::post('/booking_details','CardController@booking_details');
+// Route::get('/book','CardController@bookcar');
+// Route::post('/booking_details','CardController@booking_details');
+// Route::post('/booking_details',function(){
+//     return 'hello';
+//  });
+Route::post('/doPayment','CardController@doPayment');
 Route::post('/paytm-callback', 'CardController@paytmCallback');
 // Route::get('/card',function(){
 //     return view('pages.card');

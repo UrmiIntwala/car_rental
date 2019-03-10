@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use DB;
 use App\City;
 use App\Location;
+use App\Car;
 use Mail;
 use App\Mail\sendMail;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 class CarController extends Controller
 {
     /**
@@ -151,4 +154,31 @@ class CarController extends Controller
         // });
         Mail::send(new sendMail());
     }
+
+    public function addcar(Request $request)
+    {
+        
+        $car = new Car();
+        $car->car_name=$request['car_name'];
+        $car->seat=$request['seater'];
+        $car->plate_no=$request['plate_no'];
+        $car->km_price=$request['price_per_km'];
+        $car->price=$request['price'];
+        $car->bags=$request['air_bag'];
+        $car->path=$request['img_path'];
+        $car->number=1;
+        $car->city=$request['city'];
+        $car->save();
+        $flag=1;
+        return view('pages.addcar')->with('flag',$flag);
+    }
+
+    public function addcity(Request $request)
+    {
+        $city=new City();
+        $city->city_name=$request['city'];
+        $city->save();
+        return view('pages.addcity')->with('flag',1);
+    }
+
 }

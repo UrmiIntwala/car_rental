@@ -61,7 +61,7 @@
           <input type="date" id="myDate" name="mydate">
           <br><br>
           <span style="font-weight:bold">At what time do you need the car</span>&nbsp;&nbsp;&nbsp;
-          Hours:<input type="number" id="hours" min="1" max="12" name="hour">&nbsp;&nbsp;&nbsp;
+          Hours:<input type="number" id="hours" min="1" max="24" name="hour">&nbsp;&nbsp;&nbsp;
           Minutes:<input type="number" id="minute" min="00" max="55" step="5" name="minute">&nbsp;&nbsp;&nbsp; 
           <br><br>
           <input type="submit" class="btn btn-success btn-lg">

@@ -10,8 +10,6 @@ Please focus on your career. --}}
     <title>Warning</title>
 </head>
 <body style="color:red;">
-    This is warning from Laravel.
-    You are not on correct path.
-    Please focus on your career.
+    {{$fullname}}
 </body>
 </html>

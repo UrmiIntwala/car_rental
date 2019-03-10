@@ -28,6 +28,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail')->to('riyapal0912@gmail.com');
+        $name=session('fullname');
+        return $this->view('mail',compact(['fullname']))->to('jaimitgandhi9@gmail.com');
     }
 }

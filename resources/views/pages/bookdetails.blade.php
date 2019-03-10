@@ -16,11 +16,11 @@ body, html {
 
 .bg-image {
   /* The image used */
-  background-image: url("img/addcar.jpg");
+  background-image: url("img/bookdetails.jpg");
   
   /* Add the blur effect */
-  filter: blur(9px);
-  -webkit-filter: blur(9px);
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
 
     /* filter: opacity(0.5);
   -webkit-filter: opacity(0.5); */
@@ -31,7 +31,7 @@ body, html {
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
-  background-size:auto;
+  background-size:cover;
 }
 
 /* Position text in the middle of the page/image */
@@ -44,7 +44,7 @@ body, html {
   position: absolute;
   top: 55%;
   left: 50%;
-  bottom:-62%;
+  bottom:-60%;
   transform: translate(-50%, -50%);
   z-index: 2;
   width: 80%;
@@ -54,57 +54,44 @@ body, html {
 </style>
 </head>
 <body>
-    {{-- {{$flag}} --}}
-   @isset($flag)
-   <div class="alert alert-success">
-        Yes...Car successfully added
-    </div>
-   @endisset
+
 <div class="bg-image"></div>
 
 <div class="bg-text">
     <div class="container" style="margin-top:50px; margin-bottom:60px;">
         <div class="row justify-content-center">
             <div class="col-md-9">
-                <h1 style="text-align:center;">ADD CAR</h1><br><br>
-                <form method="POST" action="car">
+                <h1 style="text-align:center;">BOOKING DETAILS</h1><br><br>
+                <form method="POST" action="doPayment">
                 @csrf
                 <div class="row">
                     <div class="col-6">
                     <div class="form-group">
-                        <label for="name">Car Name</label>
-                        <input type="text" class="form-control" id="car_name" name="car_name" placeholder="Enter car name">
+                        <label for="name">Full Name</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your name">
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                     </div>
                     <div class="form-group">
-                        <label for="seater">Plate No.</label>
-                        <input type="text" class="form-control" id="plate_no" name="plate_no" placeholder="Enter plate number">
+                        <label for="license_no">License No.</label>
+                        <input type="text" class="form-control" id="license_no" name="license_no" placeholder="Enter your license number">
                     </div>
                     <div class="form-group">
-                        <label for="seater">Seater</label>
-                        <input type="text" class="form-control" id="seater" name="seater" placeholder="Enter number of seater">
+                        <label for="mobile_no">Mobile No.</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter mobile number">
                     </div>
                     <div class="form-group">
-                        <label for="airbags">Air Bags</label>
-                        <input type="text" class="form-control" id="air_bag" name="air_bag"  placeholder="Enter number of air bags">
+                        <label for="email">Email ID</label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email address">
                     </div>
                     </div>
                     <div class="col-6">
                     <div class="form-group">
-                        <label for="imgpath">Image Path</label>
-                        <input type="text" class="form-control" id="img_path" name="img_path" placeholder="Enter path of image">
+                        <label for="aadhar">Aadhar Card No.</label>
+                        <input type="text" class="form-control" id="aadhar" name="aadhar" placeholder="Enter your aadhar card number">
                     </div>
                     <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" placeholder="Enter price">
-                    </div>
-                    <div class="form-group">
-                        <label for="price/km">Price per km</label>
-                        <input type="text" class="form-control" id="price_per_km" name="price_per_km" placeholder="Enter price per kilometer">
-                    </div>
-                    <div class="form-group">
-                        <label for="price/km">City</label>
-                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter price per kilometer">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" id="user_address" name="user_address" rows="5" placeholder="Enter your address"></textarea>
                     </div>
                     </div>
                 </div><br>
@@ -117,8 +104,6 @@ body, html {
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script>
 
-</script>
 </body>
 </html>

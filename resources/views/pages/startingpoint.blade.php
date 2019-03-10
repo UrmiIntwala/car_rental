@@ -46,7 +46,7 @@
                      <div id="locationList"></div>
                 </div>
             </div><br>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col">
                     <h4>I want to drop my car in a different city</h4>
                 </div>
@@ -56,10 +56,10 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <br>
-        <div class="container" id="hide">
+        {{-- <div class="container" id="hide">
                 <div class="row">
                         <div class="col-3">
                             <div class="dropdown">
@@ -115,9 +115,9 @@
                              <div id="dropcityList"></div>
                         </div>
                     </div><br>
-        </div><br>
+        </div><br> --}}
         
-        {{Form::submit('NEXT',['class'=>'button btn btn-success','style'=>'width: 15%;margin-left:80%'])}}
+        {{Form::submit('NEXT',['class'=>'button btn btn-success','style'=>'width: 15%;margin-left:30%'])}}
         {{ csrf_field() }}
         <!-- {!! Form::close() !!} -->
         </form>

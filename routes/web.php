@@ -71,6 +71,10 @@ Route::get('/bookdetails', function () {
     return view('pages.bookdetails');
 });
 
+Route::get('/paytmpdf', function () {
+    return view('pages.paytmpdf');
+});
+
 Route::get('/book','CardController@bookcar');
 Route::post('/paytm-callback', 'CardController@paytmCallback');
 // Route::get('/card',function(){

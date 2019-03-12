@@ -36,7 +36,8 @@
 <div class="container">
         @if(count($car)>0)
         @foreach($car as $cars)
-        <form action="bookdetails" method="get">
+        {{-- <form action="bookdetails" method="get"> --}}
+        <form action="from_book_button" method="GET">
         <div class="row">
                 <div class="col-3">
                 <img src={{$cars->path}} alt='img'>
@@ -49,6 +50,7 @@
             <input type="text" name="bag" id="bag" value={{$cars->bags}} style="display:none;">
             <input type="text" name="price" id="price" value={{$cars->price}} style="display:none;">
             <input type="text" name="km_price" id="km_price" value={{$cars->km_price}} style="display:none;">
+            <input type="text" name="plate_no" id="plate_no" value={{$cars->plate_no}} style="display:none;">
                 <div style="margin-top:0;">
                     <span class="fa fa-car text-muted" aria-hidden="true"></span>
                     <span style="font-size:70%;font-weight:700" class="text-muted">{{$cars->seat}} Seater</span>|

@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Car;
 use App\Order;
 use Mail;
+use PDF;
 use App\Mail\sendMail;
+use App\User;
 class CardController extends Controller
 {
     function index()
@@ -97,7 +99,7 @@ class CardController extends Controller
 
     public function booking_details(Request $request)
     {
-        return 'hello';
+        // return 'hello';
         // $car_name=$request['car_name'];
        session(['car_name'=>$request['car_name']]); 
         session(['seat'=>$request['seat']]);
@@ -150,6 +152,8 @@ class CardController extends Controller
         session(['aadhar'=>$request['aadhar']]);
         session(['user_address'=>$request['user_address']]);
 
+        
+
         if (Auth::user()) {   // Check is user logged in
             $example= "example";
            // return $request;
@@ -164,7 +168,7 @@ class CardController extends Controller
             $days = $secs / 86400;
             //return $days;
             // $order->price=$days*session('price');
-           $order->price=100;
+            $order->price=100;
             // return $order->price;
             $order->transaction_id = '';
             $order->save();
@@ -471,5 +475,73 @@ class CardController extends Controller
 		} else if( 'TXN_FAILURE' === $request['STATUS'] ){
 			return view( 'payment-failed' );
 		}
-	}
+    }
+    
+    public function pdf(){
+        
+        $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+        Mail::send(new sendMail());
+        $pdf = PDF::loadView('pages.ticket_pdf', compact('data'));
+        return $pdf->download('invoice.pdf');
+    }
+
+    public function from_book_button(Request $request)
+    {
+        
+        session(['car_name'=>$request['car_name']]); 
+        session(['plate_no'=>$request['plate_no']]);
+        session(['seat'=>$request['seat']]);
+        session(['bag'=>$request['bag']]);
+        session(['price'=>$request['price']]);
+        session(['km_price'=>$request['km_price']]);
+        session(['plate_no'=>$request['plate_no']]);
+        
+        return view('pages.userinfo');
+    }
+
+    public function from_user_info(Request $request)
+    {
+        session(['fullname'=>$request['fullname']]);
+        $customer = new Customer();
+        $customer->name=$request['fullname'];
+        $customer->license_no=$request['license_no'];
+        $customer->mobile=$request['mobile'];
+        $customer->email=$request['email'];
+        $customer->aadhar=$request['aadhar'];
+        $customer->user_address=$request['user_address'];
+        $customer->save();
+        session(['license_no'=>$request['license_no']]);
+        session(['mobile'=>$request['mobile']]);
+        session(['email'=>$request['email']]);
+        session(['aadhar'=>$request['aadhar']]);
+        session(['user_address'=>$request['user_address']]);
+        return view('pages.finalbook');
+    }
+
+    public function to_ticket(){
+        $plate_no=session('plate_no');
+           Car::where('plate_no',$plate_no)->update(['in_time_hour'=>session('start_hour'),'in_time_minute'=>session('start_minute'),
+                                                            'out_time_hour'=>session('drophour'),'out_time_minute'=>session('dropminute'),
+                                                            'start_date'=>session('mydate'),'drop_date'=>session('mydropdate')]);
+        $name=Auth::user()->name;
+      
+        $data=['name'=>$name,'city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+        return view('pages.ticket',compact('data'));
+        
+    }
+
+    public function donePayment(Request $request)
+    {
+           
+           $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+            Mail::send(new sendMail());
+            $pdf = PDF::loadView('pages.ticket_pdf', compact('data'));
+            return $pdf->download('invoice.pdf');
+            //return view();
+		    // return view( 'order-complete', compact('data') );
+    }
+
+    public function test(){
+        Car::where('plate_no',7)->update(['in_time_hour'=>7]);
+    }
 }

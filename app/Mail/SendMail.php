@@ -29,6 +29,16 @@ class SendMail extends Mailable
     public function build()
     {
         $name=session('fullname');
-        return $this->view('mail',compact(['fullname']))->to('jaimitgandhi9@gmail.com');
+        $datetime1 = strtotime(session('mydropdate'));
+            $datetime2 = strtotime(session('mydate'));
+            $secs = $datetime1 - $datetime2;// == return sec in difference
+            $days = $secs / 86400;
+            //return $days;
+            //      $order->price=$days*$request['price'];
+            $amount=$days*session('price');
+            
+           // return $order->price;
+            $data=['car_name'=>session('car_name'),'plate_no'=>session('plate_no'),'amount_done'=>$amount];
+        return $this->view('mail',compact('data'))->to('jaimitgandhi9@gmail.com');
     }
 }

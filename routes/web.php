@@ -109,3 +109,12 @@ Route::post('/paytm-callback', 'CardController@paytmCallback');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/done_payment','CardController@to_ticket');
+Route::get('/download_ticket','CardController@pdf');
+Route::get('/ticket',function(){
+    return view('pages.ticket');
+});
+Route::get('/test','CardController@test');
+Route::get('/from_book_button','CardController@from_book_button');
+Route::get('/from_user_info','CardController@from_user_info');
+Route::get('/donepayment','CardController@donePayment');

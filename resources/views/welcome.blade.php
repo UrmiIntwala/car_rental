@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="{{asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
-    
+            
         </head>
     <body>
         <nav class="navbar navbar-expand-md" style="background-color:#132639;">
@@ -38,19 +38,19 @@
                                     {{-- @if(Auth::user()->role_id==1) --}}
                                     @can('admin-only',Auth::user())
                                     <li class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <a id="navbarDropdown" style="color:white;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             <i class="fa fa-briefcase">Admin</i> <span class="caret"></span>
                                         </a>
         
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="{{ url('test') }}">                                              >
+                                            <a class="dropdown-item" href="{{ url('addcar') }}">                                              
                                                 Add car                           
                                             </a>
-                                            <a class="dropdown-item" href="{{ url('test') }}">                                              >
-                                                Add Mediators
+                                            <a class="dropdown-item" href="{{ url('addcity') }}">                                              
+                                                Add city
                                                 </a>
-                                            <a class="dropdown-item" href="{{ url('test') }}">                                              >
-                                                Add city                            
+                                            <a class="dropdown-item" href="{{ url('addinnercity') }}">                                              
+                                                Add inner city                           
                                             </a>
                                         </div>
                                     </li> 
@@ -266,34 +266,39 @@
 
         <div class="page-footer" style="background-color:#132639;color:white;height:200px;">
             <div class="container">
-                <div class="row" style="font-size:180%;padding-top:80px;">
-                    <div class="col-2">
+                <div class="row" style="font-size:180%;padding-top:60px;">
+                    <div class="col-2" style="background-color:tomato;text-align:center">
                         <i class="fa fa-facebook" aria-hidden="true"></i>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2" style="background-color:springgreen;text-align:center">
                         <i class="fa fa-twitter" aria-hidden="true"></i>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2" style="background-color:slateblue;text-align:center">
                         <i class="fa fa-google-plus" aria-hidden="true"></i>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2" style="background-color:peru;text-align:center">
                         <i class="fa fa-linkedin" aria-hidden="true"></i>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2" style="background-color:lightseagreen;text-align:center">
                         <i class="fa fa-instagram" aria-hidden="true"></i>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2" style="background-color:coral;text-align:center">
                         <i class="fa fa-pinterest-p" aria-hidden="true"></i>
                     </div>
+                </div><br><br>
+                <div class="row">
+                    <p style="font-size:125%;padding-left:450px;">© 2018 Copyright:Lagoon.com</p>
                 </div>
             </div>
-            <div style="background-color:#19334d;padding-top:45px;color:white;text-align:center;height:30px">
+            {{-- <div style="background-color:#19334d;padding-top:45px;color:white;text-align:center;height:30px">
                 <p style="font-size:125%">© 2018 Copyright:Lagoon.com</p>
-            </div>
+            </div> --}}
         </div>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+        
     </body>
 </html>

@@ -67,12 +67,12 @@
                     <button type="submit" class="btn btn-success">Book Now</button>
             </div>  
         </div>
-        <div class="row" style="align:center;">  
+        {{-- <div class="row" style="align:center;">  
             <center> <button type="button" style="margin:auto;" id="flip" class="btn btn-primary active">Show More</button></center>
         </div>
         <div class="row" id="panel" style="display:none;">
             hello
-        </div>
+        </div> --}}
     </form>
         @endforeach
         <br>

@@ -38,7 +38,7 @@
                 
                 <td style="width:50%;border-right:1px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:15px 37px">
                         <div style="font-family:'Helvetica';font-size:14px;font-weight:400;color:#9b9b9b">Car Name & No.</div>
-                        <div style="font-family:'Helvetica';font-size:18px;font-weight:600;color:#4a4a4a">WegonR / GJ-05-2110</div>
+                <div style="font-family:'Helvetica';font-size:18px;font-weight:600;color:#4a4a4a">{{$data['car_name']}} / {{$data['plate_no']}}</div>
                 </td>
                 
                 <td style="width:50%;border-right:1px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:15px 0 15px 10%;">
@@ -50,8 +50,10 @@
               <tr  >
                         <td style="width:50%;border-right:1px solid #ebebeb;border-bottom:1px solid #ebebeb;padding:10px 10px 10px 37px;" colspan="2">
                     <div style="font-family:'Helvetica';font-size:14px;font-weight:400;color:#9b9b9b">Paid Money</div>
-                     <div style="font-family:'Helvetica';font-size:18px;font-weight:600;color:#4a4a4a">100</div>
+                        <div style="font-family:'Helvetica';font-size:18px;font-weight:600;color:#4a4a4a">{{$data['amount']}}</div>
                     </td>
+
+                    
               </tr>
             </tbody>
           </table>

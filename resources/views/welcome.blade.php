@@ -152,26 +152,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-4">
-                    <img src="img/Capture1.png" alt="Image">
+                    <img class="img-fluid" src="img/Capture1.png" alt="Image">
                 </div>
                 <div class="col-4">
-                    <img src="img/Capture2.png" alt="Image">
+                    <img class="img-fluid" src="img/Capture2.png" alt="Image">
                 </div>
                 <div class="col-4">
-                    <img src="img/Capture3.png" alt="Image">
+                    <img class="img-fluid" src="img/Capture3.png" alt="Image">
                 </div>
             </div>
             <br>
             <div class="row">
-                    <div class="col-4">
-                        <img src="img/Capture1.png" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img src="img/Capture2.png" alt="Image">
-                    </div>
-                    <div class="col-4">
-                        <img src="img/Capture3.png" alt="Image">
-                    </div>
+                <div class="col-4">
+                    <img class="img-fluid" src="img/Capture4.png" alt="Image">
+                </div>
+                <div class="col-4">
+                    <img class="img-fluid" src="img/Capture5.png" alt="Image">
+                </div>
+                <div class="col-4">
+                    <img class="img-fluid" src="img/Capture6.png" alt="Image">
+                </div>
             </div>
         </div><br>
         <div>
@@ -259,7 +259,7 @@
         </div>
         <br>
         <div class="container-fluid">
-            <img src="img/info.PNG" alt="info">
+            <img class="img-fluid" src="img/info.PNG" alt="info">
         </div>
 
         <div class="page-footer" style="background-color:#132639;color:white;height:200px;">

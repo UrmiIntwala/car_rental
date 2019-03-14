@@ -101,7 +101,12 @@ Route::post('/booking_details','CardController@booking_details');
 // Route::post('/booking_details',function(){
 //     return 'hello';
 //  });
-Route::post('/doPayment','CardController@doPayment');
+Route::get('/doPayment','CardController@doPayment');
+Route::get('/paytmpdf', function () {
+    return view('pages.paytmpdf');
+});
+
+Route::get('/book','CardController@bookcar');
 Route::post('/paytm-callback', 'CardController@paytmCallback');
 // Route::get('/card',function(){
 //     return view('pages.card');

@@ -40,7 +40,7 @@
         <form action="from_book_button" method="GET">
         <div class="row">
                 <div class="col-3">
-                <img src={{$cars->path}} alt='img'>
+                <img class="img-fluid" src={{$cars->path}} alt='img'>
                 </div>
        
             <div class="col-6">

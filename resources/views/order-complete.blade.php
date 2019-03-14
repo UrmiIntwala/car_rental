@@ -1,6 +1,3 @@
 Thank You!!!!<br>
 
-<br>
-Car name:{{$data['car_name']}}  <br>
-Plate No:{{$data['plate_no']}}        <br>
-Payment:{{$data['amount_done']}}
+<a href="{{url('done_payment')}}"><button type="submit">Download Receipt</button></a>

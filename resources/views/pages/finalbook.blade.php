@@ -1,1 +1,1 @@
-<a href="{{url('done_payment')}}"><button type="submit">Done Payment</button></a>
+<a href="{{url('doPayment')}}"><button type="submit">Pay via PAYTM</button></a>

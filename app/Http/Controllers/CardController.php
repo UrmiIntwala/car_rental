@@ -68,9 +68,9 @@ class CardController extends Controller
             //                 ['drop_date','<',$request['mydropdate']],
             //                 ])->get();
             $query=Car::all();
-         
-            $dayAfter = (new DateTime(session('mydate')))->format('Y-m-d');
-             //return $dayAfter; 
+            
+            $dayAfter = (new DateTime(session('mydate')))->format('d-m-Y');
+            // return $dayAfter; 
             $car=Car::where('city',session('start_city'))->where(function($query)
                                                 {    $query->whereDate('drop_date','<=',session('mydate'))
                                                     ->orWhere('drop_date',NULL);       
@@ -78,10 +78,26 @@ class CardController extends Controller
                                                     ->where(function($query){
                                                         $query->where('out_time_hour','<',session('start_hour'))
                                                         ->orWhere('out_time_hour',NULL);
-                                                    })->where('booked','<>',1)
+                                                    })
                                                     ->get();
 
-            //   return $car; 
+            // $car=Car::where('city',session('start_city'))->
+            // $car=Car::where('city',session('start_city'))->where('drop_date','<=',session('mydate'))->orWhere('drop_date',NULL)->get();;
+            // $car=Car::where('city',session('start_city'))->get();
+            // foreach($car as $test)
+            // {
+            //     // if($test::where('drop_date','=',session('mydate'))){
+            //     //     if($test::where('out_time_hour','>',session('start_hour'))){
+            //     //         unset($car[$test]);
+            //     //     }
+            //     // }
+            //     if($test['drop_date']==session('mydate')){
+            //         if($test['out_time_hour']>(session('start_hour')+1)){
+            //             unset($car[$test]);
+            //         }
+            //     }
+            // }
+            //    return $car; 
             // $car=Car::where('city',session('start_city'))->where(function($query)
             //                                    {    $query->where('drop_date','<',session('mydate'))
             //                                          ->orWhere('drop_date',NULL);       
@@ -144,17 +160,8 @@ class CardController extends Controller
 
     public function doPayment(Request $request)
     {
-         
-        session(['fullname'=>$request['fullname']]);
-        session(['license_no'=>$request['license_no']]);
-        session(['mobile'=>$request['mobile']]);
-        session(['email'=>$request['email']]);
-        session(['aadhar'=>$request['aadhar']]);
-        session(['user_address'=>$request['user_address']]);
-
         
-
-        if (Auth::user()) {   // Check is user logged in
+      
             $example= "example";
            // return $request;
             $order_id = uniqid();
@@ -167,18 +174,20 @@ class CardController extends Controller
             $secs = $datetime1 - $datetime2;// == return sec in difference
             $days = $secs / 86400;
             //return $days;
-            // $order->price=$days*session('price');
-            $order->price=100;
+            $price=session('price')*$days;   //-------------------------------------------
+            $order->price=$price;
+            // $order->price=100;
             // return $order->price;
             $order->transaction_id = '';
             $order->save();
+            session(['amount'=>$price]);
             //return 'hello';
             $data_for_request = $this->handlePaytmRequest( $order_id, $order->price );
             $paytm_txn_url = 'https://securegw-stage.paytm.in/theia/processTransaction';
             $paramList = $data_for_request['paramList'];
             $checkSum = $data_for_request['checkSum'];
             return view( 'paytm-merchant-form', compact( 'paytm_txn_url', 'paramList', 'checkSum' ) );
-        }
+       
     }
 
     public function handlePaytmRequest( $order_id, $amount ) {
@@ -435,8 +444,10 @@ class CardController extends Controller
 
     public function getConfigPaytmSettings(){
         define('PAYTM_ENVIRONMENT', 'TEST'); // PROD
-        define('PAYTM_MERCHANT_KEY', 'Vs&dpLgvW7P&BHw&'); //Change this constant's value with Merchant key received from Paytm.
-        define('PAYTM_MERCHANT_MID', 'QNtdNL69060465115075'); //Change this constant's value with MID (Merchant ID) received from Paytm.
+        define('PAYTM_MERCHANT_KEY', 'pWdD%R0HG6tjjbea');
+        define('PAYTM_MERCHANT_MID', 'kAcBlC57364871128629');
+        // define('PAYTM_MERCHANT_KEY', 'Vs&dpLgvW7P&BHw&'); //Change this constant's value with Merchant key received from Paytm.
+        // define('PAYTM_MERCHANT_MID', 'QNtdNL69060465115075'); //Change this constant's value with MID (Merchant ID) received from Paytm.
         define('PAYTM_MERCHANT_WEBSITE', 'WEBSTAGING'); //Change this constant's value with Website name received from Paytm.
         $PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
         $PAYTM_TXN_URL='https://securegw-stage.paytm.in/theia/processTransaction';
@@ -470,7 +481,10 @@ class CardController extends Controller
             // return session('user_address');
             $customer->user_address=session('user_address');
             $customer->save();
-            Mail::send(new sendMail());
+            $plate_no=session('plate_no');
+            Car::where('plate_no',$plate_no)->update(['in_time_hour'=>session('start_hour'),'in_time_minute'=>session('start_minute'),
+                                                             'out_time_hour'=>session('drophour'),'out_time_minute'=>session('dropminute'),
+                                                             'start_date'=>session('mydate'),'drop_date'=>session('mydropdate'),'booked'=>1]);
 			return view( 'order-complete', compact( 'order', 'status' ) );
 		} else if( 'TXN_FAILURE' === $request['STATUS'] ){
 			return view( 'payment-failed' );
@@ -481,13 +495,13 @@ class CardController extends Controller
         
         $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
         Mail::send(new sendMail());
-        $pdf = PDF::loadView('pages.ticket_pdf', compact('data'));
+        $pdf = PDF::loadView('pages.paytmpdf', compact('data'));
         return $pdf->download('invoice.pdf');
     }
 
     public function from_book_button(Request $request)
     {
-        
+        if (Auth::user()) { 
         session(['car_name'=>$request['car_name']]); 
         session(['plate_no'=>$request['plate_no']]);
         session(['seat'=>$request['seat']]);
@@ -497,51 +511,107 @@ class CardController extends Controller
         session(['plate_no'=>$request['plate_no']]);
         
         return view('pages.userinfo');
+        }
+        else{
+            return view('auth.login');
+        }
     }
 
     public function from_user_info(Request $request)
     {
         session(['fullname'=>$request['fullname']]);
-        $customer = new Customer();
-        $customer->name=$request['fullname'];
-        $customer->license_no=$request['license_no'];
-        $customer->mobile=$request['mobile'];
-        $customer->email=$request['email'];
-        $customer->aadhar=$request['aadhar'];
-        $customer->user_address=$request['user_address'];
-        $customer->save();
         session(['license_no'=>$request['license_no']]);
         session(['mobile'=>$request['mobile']]);
         session(['email'=>$request['email']]);
         session(['aadhar'=>$request['aadhar']]);
         session(['user_address'=>$request['user_address']]);
+         // $customer = new Customer();
+        // $customer->name=$request['fullname'];
+        // $customer->license_no=$request['license_no'];
+        // $customer->mobile=$request['mobile'];
+        // $customer->email=$request['email'];
+        // $customer->aadhar=$request['aadhar'];
+        // $customer->user_address=$request['user_address'];
+        // $customer->save();
         return view('pages.finalbook');
     }
 
     public function to_ticket(){
-        $plate_no=session('plate_no');
-           Car::where('plate_no',$plate_no)->update(['in_time_hour'=>session('start_hour'),'in_time_minute'=>session('start_minute'),
-                                                            'out_time_hour'=>session('drophour'),'out_time_minute'=>session('dropminute'),
-                                                            'start_date'=>session('mydate'),'drop_date'=>session('mydropdate')]);
+        
         $name=Auth::user()->name;
       
-        $data=['name'=>$name,'city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+        $data=['name'=>$name,'city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate'),
+                 'car_name'=>session('car_name'),'plate_no'=>session('plate_no'),'amount'=>session('amount')  ];
         return view('pages.ticket',compact('data'));
         
     }
 
-    public function donePayment(Request $request)
-    {
+    // public function donePayment(Request $request)
+    // {
+
+    //         if (Auth::user()) {   // Check is user logged in
+    //         $example= "example";
+    //        // return $request;
+    //         $order_id = uniqid();
+    //         $order = new Order();
+    //         $order->order_id = $order_id;
+    //         $order->status = 'pending';
+    //         // $order->price = ( $request->price ) ? $request->price : ''; 
+    //         $datetime1 = strtotime(session('mydropdate'));
+    //         $datetime2 = strtotime(session('mydate'));
+    //         $secs = $datetime1 - $datetime2;// == return sec in difference
+    //         $days = $secs / 86400;
+    //         //return $days;
+    //         $order->price=$days*$request['price'];
+    //        // return $order->price;
+    //         $order->transaction_id = '';
+    //         $order->save();
+    //         //return 'hello';
+    //         $data_for_request = $this->handlePaytmRequest( $order_id, $order->price );
+    //         $paytm_txn_url = 'https://securegw-stage.paytm.in/theia/processTransaction';
+    //         $paramList = $data_for_request['paramList'];
+    //         $checkSum = $data_for_request['checkSum'];
+    //         return view( 'paytm-merchant-form', compact( 'paytm_txn_url', 'paramList', 'checkSum' ) );
+    //        return view('pages.payment');
+
+    //     } else {
+    //         return view('auth.login');
+    //     }
            
-           $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
-            Mail::send(new sendMail());
-            $pdf = PDF::loadView('pages.ticket_pdf', compact('data'));
-            return $pdf->download('invoice.pdf');
-            //return view();
-		    // return view( 'order-complete', compact('data') );
-    }
+    //     //    $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+    //     //     Mail::send(new sendMail());
+    //     //     $pdf = PDF::loadView('pages.paytmpdf', compact('data'));
+    //     //     return $pdf->download('invoice.pdf');
+           
+    // }
+
 
     public function test(){
-        Car::where('plate_no',7)->update(['in_time_hour'=>7]);
+          // Check is user logged in
+            $example= "example";
+           // return $request;
+            $order_id = uniqid();
+            $order = new Order();
+            $order->order_id = $order_id;
+            $order->status = 'pending';
+            // $order->price = ( $request->price ) ? $request->price : ''; 
+            $datetime1 = strtotime(session('mydropdate'));
+            $datetime2 = strtotime(session('mydate'));
+            $secs = $datetime1 - $datetime2;// == return sec in difference
+            $days = $secs / 86400;
+            //return $days;
+            $order->price=100;
+           // return $order->price;
+            $order->transaction_id = '';
+            $order->save();
+            //return 'hello';
+            $data_for_request = $this->handlePaytmRequest( $order_id, $order->price );
+            $paytm_txn_url = 'https://securegw-stage.paytm.in/theia/processTransaction';
+            $paramList = $data_for_request['paramList'];
+            $checkSum = $data_for_request['checkSum'];
+            return view( 'paytm-merchant-form', compact( 'paytm_txn_url', 'paramList', 'checkSum' ) );
+           return view('pages.payment');
+
+        
     }
 }

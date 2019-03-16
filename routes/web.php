@@ -12,6 +12,10 @@
 */
 
 Route::get('/', function () {
+    return view('frontpage');
+});
+
+Route::get('/welcome',function(){
     return view('welcome');
 });
 
@@ -42,6 +46,10 @@ Route::get('/test',function(){
     else {
         return 'not authorized';
     }
+});
+
+Route::get('/video',function(){
+    return view('pages.frontpage');
 });
 
 Route::post('/car/fetch','CarController@fetch')->name('car.fetch');

@@ -178,7 +178,16 @@ class CarController extends Controller
         $city=new City();
         $city->city_name=$request['city'];
         $city->save();
-        return view('pages.addcity')->with('flag',1);
+        $flag=1;
+        return view('pages.addcity')->with('flag',$flag);
     }
 
+    public function addinnercity(Request $request)
+    {
+        $location=new Location();
+        $location->location_name=$request['place'];
+        $location->save();
+        $flag=1;
+        return view('pages.addinnercity')->with('flag',$flag);
+    }
 }

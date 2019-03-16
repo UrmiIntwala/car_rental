@@ -136,12 +136,16 @@ body, html {
             </nav>
 <div class="bg-image"></div>
 
+@isset($flag)
+            {{-- print innercity added successfully!!! --}}
+@endisset
+
 <div class="bg-text">
     <div class="container" style="margin-top:50px; margin-bottom:60px;">
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <h1>ADD PLACE IN CITY</h1><br><br>
-                <form method="POST" action="" class="needs-validation" novalidate>
+                <form method="POST" action="addinnercity" class="needs-validation" novalidate>
                 @csrf
                 <div class="form-group">
                     <div class="row">
@@ -150,9 +154,9 @@ body, html {
                         </div>
                         <div class="col-10">
                             <div class="form-group">
-                                <input style="width:350px;"type="text" pattern="^[A-z]{3,}$" class="form-control form-control-lg" id="place" placeholder="Enter place of city" required>
+                                <input style="width:350px;"type="text" class="form-control form-control-lg" id="place" name="place" placeholder="Enter place of city" required>
                                 <div class="invalid-feedback">
-                                    Please choose a valid city.
+                                    Please choose a valid innercity.
                                 </div> 
                             </div>
                             

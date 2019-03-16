@@ -494,7 +494,7 @@ class CardController extends Controller
     public function pdf(){
         
         $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
-        Mail::send(new sendMail());
+        // Mail::send(new sendMail());
         $pdf = PDF::loadView('pages.paytmpdf', compact('data'));
         return $pdf->download('invoice.pdf');
     }
@@ -510,7 +510,7 @@ class CardController extends Controller
         session(['km_price'=>$request['km_price']]);
         session(['plate_no'=>$request['plate_no']]);
         
-        return view('pages.userinfo');
+        return view('pages.bookdetails');
         }
         else{
             return view('auth.login');
@@ -539,7 +539,7 @@ class CardController extends Controller
     public function to_ticket(){
         
         $name=Auth::user()->name;
-      
+        Mail::send(new sendMail());
         $data=['name'=>$name,'city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate'),
                  'car_name'=>session('car_name'),'plate_no'=>session('plate_no'),'amount'=>session('amount')  ];
         return view('pages.ticket',compact('data'));

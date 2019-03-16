@@ -143,82 +143,53 @@ body, html {
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <h1 style="text-align:center;">BOOKING DETAILS</h1><br><br>
-<<<<<<< HEAD
-                <form method="POST" action="doPayment">
-=======
-                <form method="POST" action="book" class="needs-validation" novalidate>
->>>>>>> dad5d3c5e294f78392bd5176850a5bd6489a4e8b
+                <form method="get" action="from_user_info" class="needs-validation" novalidate>
                 @csrf
                 <div class="row">
                     <div class="col-6">
                     <div class="form-group">
                         <label for="name">Full Name</label>
-<<<<<<< HEAD
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Enter your name">
-                        {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
-                    </div>
-                    <div class="form-group">
-                        <label for="license_no">License No.</label>
-                        <input type="text" class="form-control" id="license_no" name="license_no" placeholder="Enter your license number">
-                    </div>
-                    <div class="form-group">
-                        <label for="mobile_no">Mobile No.</label>
-                        <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Enter mobile number">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email ID</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email address">
-=======
-                        <input type="text" pattern="^[A-z]{3,}$" class="form-control" id="fullname" placeholder="Enter your name" required>
+                        <input type="text" pattern="^[A-z]{3,}$" class="form-control" id="fullname" name="fullname" placeholder="Enter your name" required>
                         <div class="invalid-feedback">
                             Please choose a valid username.
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="license_no">License No.</label>
-                        <input type="text" pattern="^[A-Z]{2}[0-9]{13}$" class="form-control" id="license_no" placeholder="Enter your license number" required>
+                        <input type="text" pattern="^[A-Z]{2}[0-9]{13}$" class="form-control" id="license_no" name="license_no" placeholder="Enter your license number" required>
                         <div class="invalid-feedback">
                             Please enter valid license no.
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="mobile_no">Mobile No.</label>
-                        <input type="text" pattern="^[7|8|9]{1}[0-9]{9}$" class="form-control" id="mobile" placeholder="Enter mobile number" required>
+                        <input type="text" pattern="^[7|8|9]{1}[0-9]{9}$" class="form-control" id="mobile" name="mobile" placeholder="Enter mobile number" required>
                         <div class="invalid-feedback">
                             Enter the mobile no. of 10 digits.
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email ID</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
                         <div class="invalid-feedback">
                             Email should be in format abc@gmail.com
                         </div>
->>>>>>> dad5d3c5e294f78392bd5176850a5bd6489a4e8b
                     </div>
                     </div>
                     <div class="col-6">
                     <div class="form-group">
                         <label for="aadhar">Aadhar Card No.</label>
-<<<<<<< HEAD
-                        <input type="text" class="form-control" id="aadhar" name="aadhar" placeholder="Enter your aadhar card number">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <textarea class="form-control" id="user_address" name="user_address" rows="5" placeholder="Enter your address"></textarea>
-=======
-                        <input type="text" pattern="^[0-9]{12}$" class="form-control" id="aadhar" placeholder="Enter your aadhar card number" required>
+                        <input type="text" pattern="^[0-9]{12}$" class="form-control" id="aadhar" name="aadhar" placeholder="Enter your aadhar card number" required>
                         <div class="invalid-feedback">
                             Please enter valid 12 digit aadhar no.
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <textarea class="form-control" id="user_address" rows="5" placeholder="Enter your address" required></textarea>
+                        <textarea class="form-control" id="user_address" rows="5" name="user_address" placeholder="Enter your address" required></textarea>
                         <div class="invalid-feedback">
                             Address is required.
                         </div>
->>>>>>> dad5d3c5e294f78392bd5176850a5bd6489a4e8b
                     </div>
                     </div>
                 </div><br>

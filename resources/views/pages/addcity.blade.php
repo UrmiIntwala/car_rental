@@ -55,11 +55,6 @@ body, html {
 </style>
 </head>
 <body>
-    @isset($flag)
-    <div class="alert alert-success">
-         Yes...City successfully added
-     </div>
-    @endisset
         <nav class="navbar navbar-expand-md" style="background-color:#132639;">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
@@ -142,13 +137,16 @@ body, html {
             </nav>
 <div class="bg-image"></div>
 
+@isset($flag)
+            {{-- print city added successfully!!! --}}
+@endisset
+
 <div class="bg-text">
     <div class="container" style="margin-top:50px; margin-bottom:60px;">
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <h1>ADD CITY</h1><br><br>
-                <form method="POST" action="city">
-                <form method="POST" action="" class="needs-validation" novalidate>
+                <form method="POST" action="city" class="needs-validation" novalidate>
                 @csrf
                 
                     <div class="row">
@@ -156,9 +154,8 @@ body, html {
                             <h3>City</h3>
                         </div>
                         <div class="col-10">
-                            <input style="width:350px;"type="text" class="form-control form-control-lg" id="city" name="city" placeholder="Enter city name">
                             <div class="form-group">
-                                <input style="width:350px;"type="text" pattern="^[A-z]{3,}$" class="form-control form-control-lg" id="city" placeholder="Enter city name" required>
+                                <input style="width:350px;"type="text" pattern="^[A-z]{3,}$" class="form-control form-control-lg" id="city" name="city" placeholder="Enter city name" required>
                                 <div class="invalid-feedback">
                                     Please choose a valid city.
                                 </div>

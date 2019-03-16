@@ -90,7 +90,7 @@ Route::get('/addinnercity', function(){
 });
 Route::post('/city', 'CarController@addcity');
 Route::post('/car', 'CarController@addcar');
-
+Route::post('/addinnercity','CarController@addinnercity');
 Route::get('/bookdetails', function () {
     return view('pages.bookdetails');
 });
@@ -122,4 +122,4 @@ Route::get('/ticket',function(){
 Route::get('/test','CardController@test');
 Route::get('/from_book_button','CardController@from_book_button');
 Route::get('/from_user_info','CardController@from_user_info');
-Route::get('/donepayment','CardController@donePayment');
+Route::post('/donepayment','CardController@donePayment');

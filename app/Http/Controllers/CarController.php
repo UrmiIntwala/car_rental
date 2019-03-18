@@ -190,4 +190,40 @@ class CarController extends Controller
         $flag=1;
         return view('pages.addinnercity')->with('flag',$flag);
     }
+
+    public function updatecar(Request $request){
+        $car=new Car();
+        $car=Car::where('plate_no',$request['plate_no'])->get();
+        $car->booked=0;
+        $car->in_time_hour=null;
+        $car->in_time_minute=null;
+        $car->out_time_hour=null;
+        $car->out_time_hour=null;
+        $car->start_date=null;
+        $car->drop_date=null;
+        $car->save();
+    }
+
+    public function deletecar(Request $request)
+    {
+        $car=new Car();
+        $car=Car::where('plate_no',$request['plate_no'])->get();
+        $car->delete();
+    }
+
+    public function showchart(Request $request)
+    {
+        $car_names = DB::table('cars')
+                ->select('car_name')
+                ->groupBy('car_name')
+                ->orderBy('car_name')
+                ->get();
+                // return $car_names;
+           $data = DB::table('cars')
+                    ->select('car_name', DB::raw('SUM(count) as total_sales'))
+                    ->groupBy('car_name')
+                    ->get();
+        
+        return view('pages.chart',compact('data','car_names'));
+    }
 }

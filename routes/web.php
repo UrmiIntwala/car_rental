@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('frontpage');
+    return view('pages.frontpage');
 });
 
 Route::get('/welcome',function(){
@@ -96,12 +96,34 @@ Route::get('/addinnercity', function(){
         return 'not authorized';
     }
 });
+
+Route::get('updatecar',function(){
+    if (Gate::allows('admin-only', Auth::user())) {
+        return view('pages.updatecar');
+    }
+    else {
+        return 'not authorized';
+    }
+});
+
+Route::get('deletecar',function(){
+    if (Gate::allows('admin-only', Auth::user())) {
+        return view('pages.deletecar');
+    }
+    else {
+        return 'not authorized';
+    }
+});
+
+
 Route::post('/city', 'CarController@addcity');
 Route::post('/car', 'CarController@addcar');
 Route::post('/addinnercity','CarController@addinnercity');
 Route::get('/bookdetails', function () {
     return view('pages.bookdetails');
 });
+Route::post('/updatecar','CarController@updatecar');
+Route::post('/deleteecar','CarController@deletecar');
 
 Route::post('/booking_details','CardController@booking_details');
 // Route::get('/book','CardController@bookcar');
@@ -113,6 +135,9 @@ Route::get('/doPayment','CardController@doPayment');
 Route::get('/paytmpdf', function () {
     return view('pages.paytmpdf');
 });
+
+
+Route::get('/chart','CarController@showchart');
 
 Route::get('/book','CardController@bookcar');
 Route::post('/paytm-callback', 'CardController@paytmCallback');

@@ -15,8 +15,9 @@
     <body>
         <nav class="navbar navbar-expand-md" style="background-color:#132639;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
-                    {{ config('', 'CarRental') }}
+                <a class="navbar-brand" href="{{ url('welcome') }}" style="color:white;">
+                    <img src="img/lagoonj.png" alt="lagoon" style="height:50px;width:200px;">
+                    {{-- {{ config('', img/lagoon.png) }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -51,6 +52,9 @@
                                                 </a>
                                             <a class="dropdown-item" href="{{ url('addinnercity') }}">                                              
                                                 Add inner city                           
+                                            </a>
+                                            <a class="dropdown-item" href="{{ url('updatecar') }}">                                              
+                                                Update/Delete Car                            
                                             </a>
                                         </div>
                                     </li> 
@@ -298,7 +302,8 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
+        <script type="text/javascript">function add_chatinline(){var hccid=19850307;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+            add_chatinline(); </script>
         
     </body>
 </html>

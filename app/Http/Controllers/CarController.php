@@ -213,16 +213,26 @@ class CarController extends Controller
 
     public function showchart(Request $request)
     {
-        $car_names = DB::table('cars')
+        $cars = DB::table('cars')
                 ->select('car_name')
                 ->groupBy('car_name')
                 ->orderBy('car_name')
                 ->get();
                 // return $car_names;
-           $data = DB::table('cars')
+           $total = DB::table('cars')
                     ->select('car_name', DB::raw('SUM(count) as total_sales'))
                     ->groupBy('car_name')
                     ->get();
+        
+        $car_names=[];
+        $data=[];
+        // return $cars;
+        foreach($cars as $temp ){
+            array_push($car_names,$temp->car_name);
+        }
+        foreach($total as $temp2 ){
+            array_push($data,$temp2->total_sales);
+        }
         
         return view('pages.chart',compact('data','car_names'));
     }

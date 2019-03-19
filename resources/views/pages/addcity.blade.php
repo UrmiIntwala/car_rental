@@ -58,7 +58,8 @@ body, html {
         <nav class="navbar navbar-expand-md" style="background-color:#132639;">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
-                        {{ config('', 'CarRental') }}
+                        <img src="img/lagoonj.png" alt="lagoon" style="height:50px;width:200px;">
+                        {{-- {{ config('', 'CarRental') }} --}}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -93,6 +94,9 @@ body, html {
                                                     </a>
                                                 <a class="dropdown-item" href="{{ url('addinnercity') }}">                                              
                                                     Add inner city                            
+                                                </a>
+                                                <a class="dropdown-item" href="{{ url('updatecar') }}">                                              
+                                                    Update/Delete Car                            
                                                 </a>
                                             </div>
                                         </li> 

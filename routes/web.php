@@ -99,21 +99,14 @@ Route::get('/addinnercity', function(){
 
 Route::get('updatecar',function(){
     if (Gate::allows('admin-only', Auth::user())) {
-        return view('pages.updatecar');
+        return view('pages.carreturn');
     }
     else {
         return 'not authorized';
     }
 });
 
-Route::get('deletecar',function(){
-    if (Gate::allows('admin-only', Auth::user())) {
-        return view('pages.deletecar');
-    }
-    else {
-        return 'not authorized';
-    }
-});
+
 
 
 Route::post('/city', 'CarController@addcity');

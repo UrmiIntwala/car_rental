@@ -15,7 +15,7 @@
 <body>
 
     <nav class="navbar navbar-dark fixed-top" style="color:white;">
-      <a class="navbar-brand mx-auto" href="#"><img src="{{ asset('favicon.ico') }}" alt="hello">Car Rental</a>
+      <a class="navbar-brand mx-auto" href="#"><img src="img/lagoonj.png" alt="hello"></a>
         
         {{-- <a href="navbar-brand mx-auto" href="#"><img src="img/nuno.png" alt="hello"></a> --}}
     </nav>

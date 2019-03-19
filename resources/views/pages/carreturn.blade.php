@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <link rel="stylesheet" href="{{asset('font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
 body, html {
   height: 100%;
@@ -17,11 +19,11 @@ body, html {
 
 .bg-image {
   /* The image used */
-  background-image: url("img/innercity.jpg");
+  background-image: url("img/carreturn.jpg");
   
   /* Add the blur effect */
   filter: blur(9px);
-  -webkit-filter: blur(9px);
+  -webkit-filter: blur(4px);
 
     /* filter: opacity(0.5);
   -webkit-filter: opacity(0.5); */
@@ -32,7 +34,7 @@ body, html {
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:cover;
 }
 
 /* Position text in the middle of the page/image */
@@ -41,9 +43,10 @@ body, html {
   background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
-  border: 3px solid #f1f1f1;
+  border: 3px solid #f1f1f1;    
   position: absolute;
-  top: 50%;
+  top: 60%;
+  bottom: -30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -57,8 +60,7 @@ body, html {
         <nav class="navbar navbar-expand-md" style="background-color:#132639;">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}" style="color:white;">
-                        <img src="img/lagoonj.png" alt="lagoon" style="height:50px;width:200px;">
-                        {{-- {{ config('', 'CarRental') }} --}}
+                        {{ config('', 'CarRental') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -80,7 +82,7 @@ body, html {
                                         {{-- @if(Auth::user()->role_id==1) --}}
                                         @can('admin-only',Auth::user())
                                         <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" style="color:white" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <a id="navbarDropdown" style="color:white;" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                                 <i class="fa fa-briefcase">Admin</i> <span class="caret"></span>
                                             </a>
             
@@ -141,58 +143,69 @@ body, html {
 <div class="bg-image"></div>
 
 @isset($flag)
-            {{-- print innercity added successfully!!! --}}
+            {{-- print city added successfully!!! --}}
 @endisset
 
 <div class="bg-text">
     <div class="container" style="margin-top:50px; margin-bottom:60px;">
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <h1>ADD PLACE IN CITY</h1><br><br>
-                <form method="POST" action="addinnercity" class="needs-validation" novalidate>
+                <h1>CAR RETURN</h1><br>
+                <form method="POST" action="updatecar" class="needs-validation" novalidate>
                 @csrf
+                    
+                <h3>Enter the plate no. of the returned car</h3>
                 <div class="form-group">
-                    <div class="row">
-                        <div class="col-2">
-                            <h3>Place</h3>
-                        </div>
-                        <div class="col-10">
-                            <div class="form-group">
-                                <input style="width:350px;"type="text" class="form-control form-control-lg" id="place" name="place" placeholder="Enter place of city" required>
-                                <div class="invalid-feedback">
-                                    Please choose a valid innercity.
-                                </div> 
-                            </div>
-                            
-                        </div>
+                    <input style="width:300px;text-align:center;margin-left:10%;"type="text" pattern="^[0-9]{4}$" class="form-control form-control-lg" id="plate_no" name="plate_no" placeholder="Enter plate no." required>
+                    <div class="invalid-feedback" style="color:black">
+                        Please enter valid 4 digit plate no.
                     </div>
-                </div><br>
-                <center><button type="submit" style="width:150px;" class="btn btn-lg btn-light">Submit</button></center>
+                </div>
+                <br>
+                <center><button type="submit" style="width:150px;background-color:goldenrod" class="btn btn-lg">Return Car</button></center>
+            </form>
+            </div>
+
+
+            <div class="col-md-5">
+                <h1>DELETE CAR</h1><br>
+                <form method="POST" action="deletecar" class="needs-validation" novalidate>
+                @csrf
+                    
+                <h3>Enter the plate no. of the car to delete</h3>
+                <div class="form-group">
+                    <input style="width:300px;text-align:center;margin-left:10%;"type="text" pattern="^[0-9]{4}$" class="form-control form-control-lg" id="delplate_no" name="plate_no" placeholder="Enter plate no." required>
+                    <div class="invalid-feedback" style="color:black">
+                        Please enter valid 4 digit plate no.
+                    </div>
+                </div>
+                <br>
+                <center><button type="submit" style="width:150px;background-color:goldenrod" class="btn btn-lg">Delete Car</button></center>
             </form>
             </div>
         </div>
     </div>
 </div>
 <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-          'use strict';
-          window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-              form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-              }, false);
-            });
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
           }, false);
-        })();
-        </script>
+        });
+      }, false);
+    })();
+    </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

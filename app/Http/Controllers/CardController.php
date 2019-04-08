@@ -197,7 +197,7 @@ class CardController extends Controller
 		$checkSum = "";
 		$paramList = array();
 		// Create an array having all required parameters for creating checksum.
-		$paramList["MID"] = 'QNtdNL69060465115075';
+		$paramList["MID"] = 'kAcBlC57364871128629'; //MERCHANT ID
 		$paramList["ORDER_ID"] = $order_id;
 		$paramList["CUST_ID"] = $order_id;
 		$paramList["INDUSTRY_TYPE_ID"] = 'Retail';
@@ -205,7 +205,7 @@ class CardController extends Controller
 		$paramList["TXN_AMOUNT"] = $amount;
 		$paramList["WEBSITE"] = 'WEBSTAGING';
 		$paramList["CALLBACK_URL"] = url( '/paytm-callback' );
-		$paytm_merchant_key = 'Vs&dpLgvW7P&BHw&';
+		$paytm_merchant_key = 'pWdD%R0HG6tjjbea';
 		//Here checksum string will return by getChecksumFromArray() function.
 		$checkSum = getChecksumFromArray( $paramList, $paytm_merchant_key );
 		return array(
@@ -493,7 +493,10 @@ class CardController extends Controller
     
     public function pdf(){
         
-        $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+        // $data=['city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate')];
+        $name=session('fullname');
+        $data=['name'=>$name,'city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate'),
+                 'car_name'=>session('car_name'),'plate_no'=>session('plate_no'),'amount'=>session('amount')  ];
         // Mail::send(new sendMail());
         $pdf = PDF::loadView('pages.paytmpdf', compact('data'));
         return $pdf->download('invoice.pdf');
@@ -538,7 +541,8 @@ class CardController extends Controller
 
     public function to_ticket(){
         
-        $name=Auth::user()->name;
+        // $name=Auth::user()->name;
+        $name=session('fullname');
         Mail::send(new sendMail());
         $data=['name'=>$name,'city'=>session('start_city'),'start_date'=>session('mydate'),'end_date'=>session('mydropdate'),
                  'car_name'=>session('car_name'),'plate_no'=>session('plate_no'),'amount'=>session('amount')  ];

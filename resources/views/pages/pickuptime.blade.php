@@ -35,6 +35,13 @@
         <form action="third" method="post">
         @csrf
         <div class="container" >
+            <div style="color:red;">
+                @if(!empty($error))
+                  {{$error}}
+                  @else
+                  {{-- {{$error}} --}}
+                @endif
+              </div>
           <h1>From when do you need the car?</h1><br>
           
           {{-- <div class="input-group" style="width:30%">

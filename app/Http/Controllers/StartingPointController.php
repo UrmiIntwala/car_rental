@@ -43,9 +43,15 @@ class StartingPointController extends Controller
         //return $start_city;
         if($request['mydate']!=null && $request['hour']!=null && $request['minute']!=null)
         {
+            $date=date("Y-m-d");
+            if($request['mydate']<$date){
+                $error="date can not be before today's date";
+                return view('pages.pickuptime')->with('error', $error);
+            }
             session(['mydate' => $request['mydate']]);
             session(['start_hour' => $request['hour']]);
             session(['start_minute' => $request['minute']]);
+            
             return view('pages.dropofftime');
         }
         else {

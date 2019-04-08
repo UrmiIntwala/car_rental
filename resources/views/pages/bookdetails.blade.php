@@ -136,6 +136,9 @@ body, html {
                                         @endif
                                     @endauth
                                 @endif
+                            <a class="nav-link" style="color:white" href="{{ url('chart') }}">                                              
+                                Show Chart                            
+                            </a>
                         </ul>
                 </div>
                 </div>
@@ -153,7 +156,7 @@ body, html {
                     <div class="col-6">
                     <div class="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" pattern="^[A-z]{3,}$" class="form-control" id="fullname" name="fullname" placeholder="Enter your name" required>
+                        <input type="text" pattern="^[A-z]{2,}[\s][A-z]{2,}[\s][A-z]{2,}$" class="form-control" id="fullname" name="fullname" placeholder="Enter your name" required>
                         <div class="invalid-feedback">
                             Please choose a valid username.
                         </div>

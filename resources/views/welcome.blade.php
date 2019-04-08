@@ -93,6 +93,9 @@
                                     @endif
                                 @endauth
                             @endif
+                            <a class="nav-link" style="color:white" href="{{ url('chart') }}">                                              
+                                Show Chart                            
+                            </a>
                     </ul>
             </div>
             </div>

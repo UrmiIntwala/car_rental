@@ -89,6 +89,9 @@
                                         @endif
                                     @endauth
                                 @endif
+                            <a class="nav-link" style="color:white" href="{{ url('chart') }}">                                              
+                                Show Chart                            
+                            </a>
                         </ul>
                 </div>
                 </div>
@@ -128,25 +131,25 @@
                     </div>
                     <div class="form-group">
                         <label for="seater">Seater</label>
-                        <input type="number" min="1" max="6" class="form-control" id="seater" name="seater" placeholder="Enter number of seater" required>
+                        <input type="number" min="1" max="12" class="form-control" id="seater" name="seater" placeholder="Enter number of seater" required>
                         <div class="invalid-feedback">
-                            Number of seats can only be between 1 and 6.
+                            Number of seats can only be between 1 and 12.
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="airbags">Air Bags</label>
-                        <input type="number" min="1" max="6" class="form-control" id="air_bag" name="air_bag" placeholder="Enter number of air bags" required>
+                        <input type="number" min="1" max="12" class="form-control" id="air_bag" name="air_bag" placeholder="Enter number of air bags" required>
                         <div class="invalid-feedback">
-                            Number of airbags can only be between 1 and 6.
+                            Number of airbags can only be between 1 and 12.
                         </div>
                     </div>
                     </div>
                     <div class="col-6">
                     <div class="form-group">
                         <label for="imgpath">Image Path</label>
-                        <input type="text" pattern="^img/[A-z]+.(jpg|png)$" class="form-control" id="img_path" name="img_path" placeholder="Enter path of image" required>
+                        <input type="text" pattern="^cars/[A-z]+.(jpg|png)$" class="form-control" id="img_path" name="img_path" placeholder="Enter path of image" required>
                         <div class="invalid-feedback">
-                            Please enter the path as img/nameofcar.jpg or .png 
+                            Please enter the path as cars/nameofcar.jpg or .png 
                         </div>
                     </div>
                     <div class="form-group">
@@ -161,6 +164,13 @@
                         <input type="number" min="0" class="form-control" id="price/km" name="price_per_km" placeholder="Enter price per kilometer" required>
                         <div class="invalid-feedback">
                             Please enter the price
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" pattern="^[A-z]{3,}$" id="city" name="city" placeholder="Enter city" required>
+                        <div class="invalid-feedback">
+                            Please enter the city
                         </div>
                     </div>
                     </div>

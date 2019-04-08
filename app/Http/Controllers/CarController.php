@@ -168,6 +168,7 @@ class CarController extends Controller
         $car->path=$request['img_path'];
         $car->number=1;
         $car->city=$request['city'];
+        $car->count=1;
         $car->save();
         $flag=1;
         return view('pages.addcar')->with('flag',$flag);
